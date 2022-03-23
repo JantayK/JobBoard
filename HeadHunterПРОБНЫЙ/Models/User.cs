@@ -17,7 +17,19 @@ namespace HeadHunterПРОБНЫЙ.Models
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; }
+        public  string FirstName { get; set; }
+        /// <summary>
+        /// Фамилия
+        /// </summary>
+        public string SurName { get; set; }
+
+        /// <summary>
+        /// Логин для входа 
+        /// </summary>
+        public  string Login { get; set; }
+        /// <summary>
+        /// Пароль
+        /// </summary>
         string Password { get; set; }
         public string Email { get; set; }
         /// <summary>
