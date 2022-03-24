@@ -1,11 +1,19 @@
-﻿using System;
+﻿using HeadHunter.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HeadHunter.Models
 {
-    public class Employee
+    /// <summary>
+    /// Работник
+    /// </summary>
+    public class Employee : User
     {
-        // Надо написать
+        /// <summary>
+        /// Стаж работы
+        /// </summary>
+        public ExperienceType Experience { get; set; }
+
     }
 }

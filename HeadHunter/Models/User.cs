@@ -6,7 +6,7 @@ using System.Text;
 namespace HeadHunter.Models
 {
     /// <summary>
-    /// 
+    /// Абстрактный класс User 
     /// </summary>
     public abstract class User : IEntity<int>
     {
