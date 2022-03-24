@@ -1,9 +1,10 @@
-﻿using HeadHunterПРОБНЫЙ.Enums;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HeadHunter.Enums;
 
-namespace HeadHunterПРОБНЫЙ.Models
+namespace HeadHunter.Models
 {
     public class Vacancy
     {

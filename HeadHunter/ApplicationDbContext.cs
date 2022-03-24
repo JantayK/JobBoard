@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace HeadHunterПРОБНЫЙ
+namespace HeadHunter
 {
     public class ApplicationDbContext : DbContext
     {
@@ -12,7 +12,7 @@ namespace HeadHunterПРОБНЫЙ
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder();
-            builder.SetBasePath(@"D:\Projects\HeadHunterПРОБНЫЙ\HeadHunterПРОБНЫЙ");
+            builder.SetBasePath(AppDomain.CurrentDomain.BaseDirectory);
             builder.AddJsonFile("appsettings.json");
 
             var config = builder.Build();

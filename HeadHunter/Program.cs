@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace HeadHunterПРОБНЫЙ
+namespace HeadHunter
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
