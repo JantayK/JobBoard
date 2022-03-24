@@ -30,7 +30,10 @@ namespace HeadHunter.Models
         /// <summary>
         /// Пароль
         /// </summary>
-        string Password { get; set; }
+        public string Password { get; set; }
+        /// <summary>
+        /// Почта
+        /// </summary>
         public string Email { get; set; }
         /// <summary>
         /// Пол
