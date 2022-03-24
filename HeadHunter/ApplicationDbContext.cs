@@ -24,5 +24,15 @@ namespace HeadHunter
             var connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString);
         }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasIndex(x => x.Login)
+                .IsUnique();
+        }
     }
 }

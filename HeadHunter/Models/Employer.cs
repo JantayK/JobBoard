@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace HeadHunter.Models
@@ -18,18 +19,26 @@ namespace HeadHunter.Models
         /// <summary>
         /// Наименование компании работодателя
         /// </summary>
+        [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string CompanyName { get; set; }
         /// <summary>
         /// Описание работодателя
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         /// <summary>
         /// Год основания
         /// </summary>
+        [Required]
+        [StringLength(50, MinimumLength = 1)]
         public int FoundationYear { get; set; }
         /// <summary>
         /// Адрес
         /// </summary>
-        public string Address { get; set; }
+        public string? Address { get; set; }
+        /// <summary>
+        /// Ссылка на вакансии
+        /// </summary>
+        public virtual ICollection<Vacancy> VacancyList { get; set; }
     }
 }
