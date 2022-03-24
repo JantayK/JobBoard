@@ -14,6 +14,14 @@ namespace HeadHunter.Models
         /// Стаж работы
         /// </summary>
         public ExperienceType Experience { get; set; }
+        /// <summary>
+        /// Тип образования
+        /// </summary>
+        public EducationType Education { get; set; }
+        /// <summary>
+        /// Описание
+        /// </summary>
+        public string Description { get; set; }
 
     }
 }
