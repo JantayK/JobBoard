@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HeadHunterПРОБНЫЙ.Enums
+namespace HeadHunter.Enums
 {
     public enum ExperienceType
     {

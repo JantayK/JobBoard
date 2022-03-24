@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HeadHunterПРОБНЫЙ.Models
+namespace HeadHunter.Models
 {
     public class Employer : User
     {

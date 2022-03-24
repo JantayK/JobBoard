@@ -1,9 +1,9 @@
-﻿using HeadHunterПРОБНЫЙ.Enums;
+﻿using  HeadHunter.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HeadHunterПРОБНЫЙ.Models
+namespace HeadHunter.Models
 {
     /// <summary>
     /// 
