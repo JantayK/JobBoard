@@ -11,5 +11,10 @@ namespace HeadHunter.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public bool getSearchLoginUser(string login)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
