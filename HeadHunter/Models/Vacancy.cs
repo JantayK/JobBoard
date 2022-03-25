@@ -72,11 +72,16 @@ namespace HeadHunter.Models
         /// <summary>
         /// Работодатель
         /// </summary>
-        public Employer Employer { get; set; }
+        public virtual Employer Employer { get; set; }
 
         /// <summary>
         /// Идентификатор работодателя
         /// </summary>
         public long EmployerId { get; set; }
+
+        /// <summary>
+        /// Список подавшихся на вакансию работников
+        /// </summary>
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
