@@ -11,6 +11,19 @@ namespace HeadHunter.Models
     /// </summary>
     public abstract class User : IEntity<int>
     {
+        public User()
+        {
+
+        }
+
+        public User(string firstname, string surname, string login, string password, string email)
+        {
+            FirstName = firstname;
+            SurName = surname;
+            Login = login;
+            Password = password;
+            Email = email;
+        }
         /// <summary>
         /// Идентификатор
         /// </summary>
