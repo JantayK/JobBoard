@@ -28,7 +28,7 @@ namespace HeadHunter.Services
                 (employer.CompanyName == null && employer.CompanyName.Trim() == "")||
                 (employer.FoundationYear == null&& employer.FoundationYear == 0 ))
             {
-                errors.Append("Все поля должны быть заполнины \n");
+                errors.Append("Все поля должны быть заполнены! \n");
             }
             if (_userRepositori.getSearchLoginUser(employer.Login))
             {
@@ -50,7 +50,6 @@ namespace HeadHunter.Services
 
             try
             {
-
 
                 _userRepositori.AddNewUser(employer);
                 return new Result<bool>
