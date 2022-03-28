@@ -12,6 +12,7 @@ namespace HeadHunter
         public DbSet<User> Users;
         public DbSet<Employee> Employees;
         public DbSet<Employer> Employers;
+        public DbSet<Vacancy> Vacancies;
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
