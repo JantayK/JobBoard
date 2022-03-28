@@ -16,12 +16,17 @@ namespace HeadHunter.Services
             _userRepositori = new EmployerRepositori();
         }
 
-        public Result<bool> RegistredUser(Employer employer)
+        public Result<bool> RegistredUser(Employer employer, string pass2)
         {
             var errors = new StringBuilder();
 
             if (employer == null || (employer.Login == null && employer.Login.Trim() =="") || 
-                (employer.Password == null && employer.Password.Trim() ==""))
+                (employer.Password == null && employer.Password.Trim() =="")||
+                (employer.FirstName == null && employer.FirstName.Trim() == "")||
+                (employer.SurName == null && employer.SurName.Trim() == "")||
+                (employer.Email == null && employer.Email.Trim() == "")||
+                (employer.CompanyName == null && employer.CompanyName.Trim() == "")||
+                (employer.FoundationYear == null ))
             {
                 errors.Append("Все поля должны быть заполнины \n");
             }
@@ -29,6 +34,16 @@ namespace HeadHunter.Services
             {
                 errors.Append("Такой пользователь уже есть \n");
             }
+
+            if (employer.Password == pass2)
+            {
+                errors.Append("Пороли не совпадают \n");
+            }
+            if (employer.Password.Length >= 6)
+            {
+                errors.Append("Пороли меньше 6 символов \n");
+            }
+
             var errorMessage = errors.ToString();
             if (!string.IsNullOrEmpty(errorMessage))
                 return new Result<bool> { IsSuccess = false, Message = errorMessage };
