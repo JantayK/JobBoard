@@ -7,39 +7,38 @@ using HeadHunter.Utilits;
 
 namespace HeadHunter.Services
 {
-    public class EmployerService
+    public class EmployeeServes
     {
-        private IUserRepositori<Employer> _userRepositori;
+        private IUserRepositori<Employee> _userRepositori;
 
-        public EmployerService()
+        public EmployeeServes()
         {
-            _userRepositori = new EmployerRepositori();
+            _userRepositori = new EmployeesRepositori();
         }
 
-        public Result<bool> RegistredUser(Employer employer, string pass2)
+
+        public Result<bool> RegistredUser(Employee employee, string pass2)
         {
             var errors = new StringBuilder();
 
-            if (employer == null || (employer.Login == null && employer.Login.Trim() =="") || 
-                (employer.Password == null && employer.Password.Trim() =="")||
-                (employer.FirstName == null && employer.FirstName.Trim() == "")||
-                (employer.SurName == null && employer.SurName.Trim() == "")||
-                (employer.Email == null && employer.Email.Trim() == "")||
-                (employer.CompanyName == null && employer.CompanyName.Trim() == "")||
-                (employer.FoundationYear == null&& employer.FoundationYear == 0 ))
+            if (employee == null || (employee.Login == null && employee.Login.Trim() == "") ||
+                (employee.Password == null && employee.Password.Trim() == "") ||
+                (employee.FirstName == null && employee.FirstName.Trim() == "") ||
+                (employee.SurName == null && employee.SurName.Trim() == "") ||
+                (employee.Email == null && employee.Email.Trim() == ""))
             {
-                errors.Append("Все поля должны быть заполнены! \n");
+                errors.Append("Все поля должны быть заполнины \n");
             }
-            if (_userRepositori.getSearchLoginUser(employer.Login))
+            if (_userRepositori.getSearchLoginUser(employee.Login))
             {
                 errors.Append("Такой пользователь уже есть \n");
             }
 
-            if (employer.Password == pass2)
+            if (employee.Password == pass2)
             {
                 errors.Append("Пороли не совпадают \n");
             }
-            if (employer.Password.Length >= 6)
+            if (employee.Password.Length >= 6)
             {
                 errors.Append("Пороли меньше 6 символов \n");
             }
@@ -51,12 +50,13 @@ namespace HeadHunter.Services
             try
             {
 
-                _userRepositori.AddNewUser(employer);
+
+                _userRepositori.AddNewUser(employee);
                 return new Result<bool>
                 {
                     IsSuccess = true,
                     Message = "",
-                    
+
                 };
             }
             catch (Exception ex)
@@ -68,5 +68,7 @@ namespace HeadHunter.Services
                 };
             }
         }
+
+        
     }
 }
