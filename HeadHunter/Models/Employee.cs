@@ -11,7 +11,12 @@ namespace HeadHunter.Models
     /// </summary>
     public class Employee : User
     {
-        public Employee(string employeeinfo)
+        public Employee()
+        {
+
+        }
+
+        public Employee(string employeeinfo, string firstname, string surname, string login, string password, string email) : base(firstname, surname, login, password, email)
         {
             EmployeeInfo = employeeinfo;
         }

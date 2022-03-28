@@ -1,13 +1,39 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using HeadHunter.Enums;
 
 namespace HeadHunter.Models
 {
-    public class Vacancy
+    public class Vacancy : IEntity<int>
     {
+        public Vacancy()
+        {
+
+        }
+
+        public Vacancy(string name, string description, string keyskills, string address, decimal salary, bool archived, string contact, bool hastest)
+        {
+            Name = name;
+            Description = description;
+            KeySkills = keyskills;
+            Address = address;
+            Salary = salary;
+            Archived = archived;
+            HasTest = hastest;
+        }
+        /// <summary>
+        /// Идентификатор вакансии
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Идентификатор работодателя
+        /// </summary>
+        public long EmployerId { get; set; }
+
         /// <summary>
         /// Название вакансии
         /// </summary>
@@ -26,7 +52,7 @@ namespace HeadHunter.Models
         /// <summary>
         /// Ключевые умения
         /// </summary>
-        public IReadOnlyList<string> KeySkills { get; set; }
+        public string KeySkills { get; set; }
 
         /// <summary>
         /// Адрес
@@ -73,11 +99,6 @@ namespace HeadHunter.Models
         /// Работодатель
         /// </summary>
         public virtual Employer Employer { get; set; }
-
-        /// <summary>
-        /// Идентификатор работодателя
-        /// </summary>
-        public long EmployerId { get; set; }
 
         /// <summary>
         /// Список подавшихся на вакансию работников

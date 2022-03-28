@@ -7,7 +7,12 @@ namespace HeadHunter.Models
 {
     public class Employer : User
     {
-        public Employer(string companyname, string description, int fundyear, string address  )
+        public Employer()
+        {
+
+        }
+
+        public Employer(string companyname, string description, int fundyear, string address, string firstname, string surname, string login, string password, string email) : base(firstname, surname, login, password, email) 
         {
             CompanyName = companyname;
             Description = description;
