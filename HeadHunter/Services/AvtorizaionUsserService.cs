@@ -15,22 +15,28 @@ namespace HeadHunter.Services
         {
             var errors = new StringBuilder();
 
-            if (login == null  || pass == null)
+            if (login == null || pass == null)
             {
                 errors.Append("Все поля должны быть заполнины \n");
             }
 
-            if (_avtorizaion.AvtorizaionUssers(login,pass))
+            if (!_avtorizaion.AvtorizaionUssers(login, pass))
             {
                 errors.Append("Пользователь не найден\n");
             }
 
             var errorMessage = errors.ToString();
             if (!string.IsNullOrEmpty(errorMessage))
-                return new Result<bool> { IsSuccess = false, Message = errorMessage };
+                return new Result<bool> {IsSuccess = false, Message = errorMessage};
 
-            return new Result<bool> { IsSuccess = true, Message = ""};
+
+
+            return new Result<bool> {IsSuccess = true, Message = ""};
         }
 
+        public Result<bool> AvtorizaionTupe(string login)
+        {
+            return new Result<bool> {IsSuccess = true, Message = _avtorizaion.GetUsserType(login).ToString()};
+        }
     }
 }

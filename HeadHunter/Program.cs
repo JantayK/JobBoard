@@ -79,10 +79,8 @@ namespace HeadHunter
             }
             else
             {
-                // Надо решить что будем присваевать 
                 nameUser = login;
-
-                //Идем дальше 
+                //Вызываем меню работадателя 
             }
         }
 
@@ -135,20 +133,15 @@ namespace HeadHunter
             }
             else
             {
-                // Надо решить что будем присваевать 
                 nameUser = login;
-
-                //Идем дальше 
+                //Вызываем меню работника
             }
         }
 
         public static void AvtorizaionUsser()
         {
-
             AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
-
             string login, pass;
-            
             Console.WriteLine("Ведите логин");
             login = Console.ReadLine();
             Console.WriteLine("Ведите пороль");
@@ -166,7 +159,15 @@ namespace HeadHunter
             else
             {
                 nameUser = login;
-                //Идем дальше 
+                if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
+                {
+                    //Вызываем меню работадателя 
+                }
+                else
+                {
+                    //Вызываем меню работника
+                }
+                
             }
 
         }
