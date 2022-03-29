@@ -9,9 +9,10 @@ namespace HeadHunter
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<User> Users;
-        public DbSet<Employee> Employees;
-        public DbSet<Employer> Employers;
+        public DbSet<User> Users { get; set;  }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employer> Employers { get; set; }
+        public DbSet<Vacancy> Vacancies { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,6 +24,16 @@ namespace HeadHunter
             var config = builder.Build();
             var connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString);
+        }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasIndex(x => x.Login)
+                .IsUnique();
         }
     }
 }

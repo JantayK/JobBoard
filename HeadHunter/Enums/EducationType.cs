@@ -4,7 +4,22 @@ using System.Text;
 
 namespace HeadHunter.Enums
 {
-    class EducationType
+    /// <summary>
+    /// Виды образования
+    /// </summary>
+    public enum EducationType
     {
+        /// <summary>
+        /// Высшеее образование
+        /// </summary>
+        HigherEducation = 1,
+        /// <summary>
+        /// Среднеее образование
+        /// </summary>
+        SecondaryEducation = 2,
+        /// <summary>
+        /// Без образования
+        /// </summary>
+        WithoutEducation = 3
     }
 }
