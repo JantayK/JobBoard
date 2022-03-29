@@ -1,7 +1,6 @@
 ﻿using HeadHunter.Models;
 using System;
 using HeadHunter.Enums;
-using HeadHunter.Models;
 using HeadHunter.Services;
 using HeadHunter.Utilits;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ namespace HeadHunter
         private static string nameUser;
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menu(mainMenu);
         }
         
 
@@ -27,6 +26,7 @@ namespace HeadHunter
             string firstName , surName, login, password, password2, email, companyName, description, address, sex;
             int foundationYear = 0;
 
+            Console.Clear();
             Console.WriteLine("Введите логин:");
             login = Console.ReadLine();
             Console.WriteLine("Введите пароль, пороль должен быть не меньше 6 символов:");
@@ -85,7 +85,7 @@ namespace HeadHunter
         }
 
         /// <summary>
-        /// Регистрация Пользователя 
+        /// Регистрация Соискателя
         /// </summary>
         public static void RegistrationEmployee()
         {
@@ -93,6 +93,7 @@ namespace HeadHunter
 
             string firstName, surName, login, password, password2,email, sex;
 
+            Console.Clear();
             Console.WriteLine("Введите логин:");
             login = Console.ReadLine();
             Console.WriteLine("Введите пароль, пороль должен быть не меньше 6 символов:");
@@ -142,9 +143,10 @@ namespace HeadHunter
         {
             AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
             string login, pass;
-            Console.WriteLine("Ведите логин");
+            Console.Clear();
+            Console.WriteLine("Введите логин");
             login = Console.ReadLine();
-            Console.WriteLine("Ведите пороль");
+            Console.WriteLine("Введите пороль");
             pass = Console.ReadLine();
 
             var IsRessult = _avtorizaion.Avtorizaion(login, pass);
@@ -224,5 +226,29 @@ namespace HeadHunter
                 Console.WriteLine(option.Name);
             }
         }
+
+        /// <summary>
+        /// Главное меню
+        /// </summary>
+        public static List<Option> mainMenu = new List<Option>
+            {
+                new Option("Войти", () => AvtorizaionUsser()),
+                new Option("Зарегистрироваться", () => RegistrationMenu()),
+                new Option("Выйти из приложения", () => Environment.Exit(0)),
+            };
+        /// <summary>
+        /// Меню регистрации
+        /// </summary>
+        public static void RegistrationMenu()
+        {
+            Console.Clear();
+            List<Option> Registration = new List<Option>
+            {
+                new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
+                new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() )
+            };
+            Menu(Registration);
+        }
+        
     }
 }
