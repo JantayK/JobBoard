@@ -63,5 +63,7 @@ namespace HeadHunter.Models
         /// Пол
         /// </summary>
         public Sex Sex { get; set; }
+
+        public string Discriminator { get; set; }
     }
 }

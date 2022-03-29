@@ -35,11 +35,11 @@ namespace HeadHunter.Services
                 errors.Append("Такой пользователь уже есть \n");
             }
 
-            if (employer.Password == pass2)
+            if (employer.Password != pass2)
             {
                 errors.Append("Пороли не совпадают \n");
             }
-            if (employer.Password.Length >= 6)
+            if (employer.Password.Length < 6)
             {
                 errors.Append("Пороли меньше 6 символов \n");
             }

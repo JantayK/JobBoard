@@ -20,5 +20,18 @@ namespace HeadHunter.Repositories
 
             return isValid;
         }
+
+
+        public string GetUsserType(string login)
+        {
+            string tupe;
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
+            {
+               var user = dbContext.Users.FirstOrDefault(x => x.Login == login);
+               tupe = user.Discriminator;
+            }
+
+            return tupe;
+        }
     }
 }
