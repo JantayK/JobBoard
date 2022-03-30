@@ -12,8 +12,8 @@ namespace HeadHunter
         private static string nameUser;
         static void Main(string[] args)
         {
-            Menu(mainMenu);
-            //RegistrationNewVacancy();
+            //Menu(mainMenu);
+            RegistrationNewVacancy();
         }
 
         public static void RegistrationNewVacancy()
@@ -21,7 +21,7 @@ namespace HeadHunter
             //VacancyService _vacancyService = new VacancyService();
 
             string name, description, keyskills, address, contact, experienceType, employmentType;
-            //int experience = 0, employment = 0;
+            int experience; /*employment = 0;*/
             bool hastest, archived;
             decimal salary;
             VacancyType type;
@@ -29,9 +29,6 @@ namespace HeadHunter
             DateTime publishedAt;
             //Employer employer;
             int cutout = 0; /*experienceType = Convert.ToInt32(experienceType);*/
-
-
-
 
             Console.Clear();
             Console.WriteLine("Введите название: ");
@@ -44,14 +41,14 @@ namespace HeadHunter
             Console.WriteLine("Введите адрес");
             address = Console.ReadLine();
             Console.WriteLine($"Выберите подходящий номер: \n 1. Нет опыта \n 2. От 1 года до 3 лет \n 3. От 3 до 6 лет \n 4. Более 6 лет");
-            int.TryParse(Console.ReadLine(), out cutout);
-            //switch (cutout)
+            //experienceType = int.Parse(Console.ReadLine());
+            //switch (experienceType)
             //{
             //    case 0:
             //        Console.Clear();
             //        Console.WriteLine("Не коректный ввод");
             //        RegistrationNewVacancy(); //надо посмотреть идет перезаписть или создает новую
-            //        cutout = 0;
+            //        experienceType = 0;
             //        break;
             //    case 1:
             //        Console.Clear();
