@@ -27,7 +27,7 @@ namespace HeadHunter.Services
                 (employee.SurName == null && employee.SurName.Trim() == "") ||
                 (employee.Email == null && employee.Email.Trim() == ""))
             {
-                errors.Append("Все поля должны быть заполнины \n");
+                errors.Append("Все поля должны быть заполнены! \n");
             }
             if (_userRepositori.getSearchLoginUser(employee.Login))
             {
@@ -36,11 +36,11 @@ namespace HeadHunter.Services
 
             if (employee.Password != pass2)
             {
-                errors.Append("Пороли не совпадают \n");
+                errors.Append("Пароли не совпадают \n");
             }
             if (employee.Password.Length < 6)
             {
-                errors.Append("Пороли меньше 6 символов \n");
+                errors.Append("Пароли меньше 6 символов \n");
             }
 
             var errorMessage = errors.ToString();
