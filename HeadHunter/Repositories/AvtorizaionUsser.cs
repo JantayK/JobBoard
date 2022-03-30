@@ -33,5 +33,16 @@ namespace HeadHunter.Repositories
 
             return tupe;
         }
+        public int GetUsserId(string login)
+        {
+            int userId;
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
+            {
+                var user = dbContext.Users.FirstOrDefault(x => x.Login == login);
+                userId = user.Id;
+            }
+
+            return userId;
+        }
     }
 }

@@ -9,7 +9,8 @@ namespace HeadHunter
 {
     internal class Program
     {
-        private static string nameUser;
+        private static string nameUser ="";
+        private static int idUser = 0;
         static void Main(string[] args)
         {
             Menu(mainMenu);
@@ -50,7 +51,7 @@ namespace HeadHunter
             Console.WriteLine("Введите год основания компании:");
             int.TryParse(Console.ReadLine(), out foundationYear );
 
-            if (foundationYear == 0) foundationYear = DateTime.Now.Year;
+            if (foundationYear <= 0) foundationYear = DateTime.Now.Year;
 
             Employer employer = new Employer()
             {
@@ -80,7 +81,9 @@ namespace HeadHunter
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                 //Вызываем меню работадателя 
             }
         }
@@ -155,7 +158,9 @@ namespace HeadHunter
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                 //Вызываем меню работника
             }
         }
@@ -181,18 +186,33 @@ namespace HeadHunter
             }
             else
             {
-                nameUser = login;
+                
+                
                 if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
                 {
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                     //Вызываем меню работадателя 
                 }
                 else
                 {
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                     //Вызываем меню работника
                 }
                 
             }
 
+        }
+        /// <summary>
+        /// Обнулени данных и переход в стартовое меню
+        /// </summary>
+        public static void LogUot()
+        {
+            nameUser = "";
+            idUser = 0;
+            Console.Clear();
+            Menu(mainMenu);
         }
 
         public static void Menu(List<Option> options)
