@@ -4,6 +4,7 @@ using HeadHunter.Enums;
 using HeadHunter.Services;
 using HeadHunter.Utilits;
 using System.Collections.Generic;
+using HeadHunter.Repositories;
 
 namespace HeadHunter
 {
@@ -384,7 +385,15 @@ namespace HeadHunter
         /// </summary>
         public static void SeeAvailableVacancies()
         {
-            //Надо написать
+            VacanciesRepository _vacanciesRepository = new VacanciesRepository();
+
+            var Vacancies = _vacanciesRepository.GetVacancyOpen();
+
+            foreach (var item in Vacancies)
+            {
+                item.PrintInfo();
+            }
+            
         }
 
 
