@@ -76,8 +76,7 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
@@ -154,7 +153,7 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
@@ -182,7 +181,7 @@ namespace HeadHunter
                 Console.WriteLine(IsRessult.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                AvtorizaionUsser();
+                Menu(mainMenu);
             }
             else
             {
