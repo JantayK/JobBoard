@@ -81,7 +81,7 @@ namespace HeadHunter
             else
             {
                 nameUser = login;
-                //Вызываем меню работадателя 
+                Menu(EmployerMenu);
             }
         }
 
@@ -156,7 +156,7 @@ namespace HeadHunter
             else
             {
                 nameUser = login;
-                //Вызываем меню работника
+                Menu(EmployeeMenu);
             }
         }
 
@@ -184,11 +184,11 @@ namespace HeadHunter
                 nameUser = login;
                 if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
                 {
-                    //Вызываем меню работадателя 
+                    Menu(EmployerMenu);
                 }
                 else
                 {
-                    //Вызываем меню работника
+                    Menu(EmployeeMenu);
                 }
                 
             }
@@ -231,9 +231,125 @@ namespace HeadHunter
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Главное меню
+        /// </summary>
+        public static List<Option> mainMenu = new List<Option>
+            {
+                new Option("Войти", () => AvtorizaionUsser()),
+                new Option("Зарегистрироваться", () => RegistrationMenu()),
+                new Option("Выйти из приложения", () => Environment.Exit(0)),
+            };
+        
+        public static void Exit()
+        {
+            Menu(mainMenu);
+        }
+
+        /// <summary>
+        /// Меню регистрации
+        /// </summary>
+        public static void RegistrationMenu()
+        {
+            Console.Clear();
+            List<Option> Registration = new List<Option>
+            {
+                new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
+                new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() ),
+                new Option("Вернуться в главное меню", () => Exit() )
+            };
+            Menu(Registration);
+        }
+
+        /// <summary>
+        /// Меню работодателя
+        /// </summary>
+        public static List<Option> EmployerMenu = new List<Option>
+        {
+            new Option("Регистрация вакансий", () => VacancyRegistration() ),
+            new Option("Просмотреть вакансии", () => SeeVacancies()),
+            new Option("Изменить доступ к вакансии", () => ChangeStatus() ),
+            new Option("Вернуться в главное меню", () => Exit())
+        };
+
+
+        /// <summary>
+        /// Меню соискателя
+        /// </summary>
+        public static List<Option> EmployeeMenu = new List<Option>
+        {
+            new Option("Просмотреть доступные вакансии", () => SeeAvailableVacancies()),
+            new Option("Вернуться в главное меню", () => Exit())
+        };
+
+        /// <summary>
+        /// Регистрация вакансий
+        /// </summary>
+        public static void VacancyRegistration()
+        {
+            // Надо написать
+        }
+
+        /// <summary>
+        /// Просмотр вакансий
+        /// </summary>
+        public static void SeeVacancies()
+        {
+            //Надо написать
+        }
+
+        /// <summary>
+        /// Изменить статус вакансии
+        /// </summary>
+        public static void ChangeStatus()
+        {
+            //Надо написать 
+        }
+
+        /// <summary>
+        /// Просмотр доступных вакансий для соискателя 
+        /// </summary>
+        public static void SeeAvailableVacancies()
+        {
+            //Надо написать
+        }
+
+
+
         static void WriteMenu(List<Option> options, Option selectedOption)
         {
             Console.Clear();
+            if (options == mainMenu)
+            {
+                Console.WriteLine("Вас приветствует приложение Доски Объявлений\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+            if(options == EmployeeMenu)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Личный кабинет Соискателя\n");
+                Console.ResetColor();
+                Console.WriteLine("Добро пожаловать\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+            if (options == EmployerMenu)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Личный кабинет Работодателя\n");
+                Console.ResetColor();
+                Console.WriteLine("Добро пожаловать\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+
+
             foreach (Option option in options)
             {
                 if (option == selectedOption)
@@ -247,29 +363,5 @@ namespace HeadHunter
                 Console.WriteLine(option.Name);
             }
         }
-
-        /// <summary>
-        /// Главное меню
-        /// </summary>
-        public static List<Option> mainMenu = new List<Option>
-            {
-                new Option("Войти", () => AvtorizaionUsser()),
-                new Option("Зарегистрироваться", () => RegistrationMenu()),
-                new Option("Выйти из приложения", () => Environment.Exit(0)),
-            };
-        /// <summary>
-        /// Меню регистрации
-        /// </summary>
-        public static void RegistrationMenu()
-        {
-            Console.Clear();
-            List<Option> Registration = new List<Option>
-            {
-                new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
-                new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() )
-            };
-            Menu(Registration);
-        }
-        
     }
 }
