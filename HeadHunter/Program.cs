@@ -13,8 +13,93 @@ namespace HeadHunter
         static void Main(string[] args)
         {
             Menu(mainMenu);
+            //RegistrationNewVacancy();
         }
-        
+
+        public static void RegistrationNewVacancy()
+        {
+            //VacancyService _vacancyService = new VacancyService();
+
+            string name, description, keyskills, address, contact, experienceType, employmentType;
+            //int experience = 0, employment = 0;
+            bool hastest, archived;
+            decimal salary;
+            VacancyType type;
+            //ExperienceType experienceType;
+            DateTime publishedAt;
+            //Employer employer;
+            int cutout = 0; /*experienceType = Convert.ToInt32(experienceType);*/
+
+
+
+
+            Console.Clear();
+            Console.WriteLine("Введите название: ");
+            name = Console.ReadLine();
+            type = VacancyType.Open;
+            Console.WriteLine("Введите описание вакансии");
+            description = Console.ReadLine();
+            Console.WriteLine("Введите ключевые умения");
+            keyskills = Console.ReadLine();
+            Console.WriteLine("Введите адрес");
+            address = Console.ReadLine();
+            Console.WriteLine($"Выберите подходящий номер: \n 1. Нет опыта \n 2. От 1 года до 3 лет \n 3. От 3 до 6 лет \n 4. Более 6 лет");
+            int.TryParse(Console.ReadLine(), out cutout);
+            //switch (cutout)
+            //{
+            //    case 0:
+            //        Console.Clear();
+            //        Console.WriteLine("Не коректный ввод");
+            //        RegistrationNewVacancy(); //надо посмотреть идет перезаписть или создает новую
+            //        cutout = 0;
+            //        break;
+            //    case 1:
+            //        Console.Clear();
+            //        cutout = 0;
+            //        //Распечатывание по катигориям
+            //        ExperienceType.NoExperience;
+            //        break;
+            //    case 2:
+            //        Console.Clear();
+            //        PrintMagazin();
+            //        Purchases();
+            //        break;
+            //    case 3:
+            //        return;
+            //    default:
+            //        Console.Clear();
+            //        Console.WriteLine("Я не знаю такой команды");
+            //        cutout = 0;
+            //        Start();
+            //        break;
+            //}
+
+            Console.WriteLine($"Выберите подходящий номер: \n 1. Полная занятость \n 2. Частичная занятость \n 3. Волонтерство \n 4. Стажировка");
+            employmentType = Console.ReadLine();
+            archived = false;
+            publishedAt = DateTime.Now;
+            Console.WriteLine("Введите конт. номер");
+            contact = Console.ReadLine();
+
+
+            Vacancy vacancy = new Vacancy()
+            {
+                Name = name,
+                Description = description,
+                KeySkills = keyskills,
+                Address = address,
+                Contact = contact,
+
+                //Experience = (ExperienceType)experience,
+                //Type = (VacancyType)type,
+                PublishedAt = (DateTime)publishedAt,
+                //Experience = experienceType == "1" ? ExperienceType.NoExperience : ExperienceType.MoreThan6,
+                Experience = (ExperienceType)cutout,
+
+
+            };
+        }
+
 
         /// <summary>
         /// Регистрация Работадателя 
@@ -249,6 +334,5 @@ namespace HeadHunter
             };
             Menu(Registration);
         }
-        
     }
 }

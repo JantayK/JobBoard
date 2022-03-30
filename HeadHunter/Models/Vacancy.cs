@@ -14,16 +14,16 @@ namespace HeadHunter.Models
 
         }
 
-        public Vacancy(string name, string description, string keyskills, string address, decimal salary, bool archived, string contact, bool hastest)
-        {
-            Name = name;
-            Description = description;
-            KeySkills = keyskills;
-            Address = address;
-            Salary = salary;
-            Archived = archived;
-            HasTest = hastest;
-        }
+        //public Vacancy(string name, string description, string keyskills, string address, decimal salary, bool archived, string contact, bool hastest)
+        //{
+        //    Name = name;
+        //    Description = description;
+        //    KeySkills = keyskills;
+        //    Address = address;
+        //    Salary = salary;
+        //    Archived = archived;
+        //    HasTest = hastest;
+        //}
         /// <summary>
         /// Идентификатор вакансии
         /// </summary>
