@@ -37,11 +37,11 @@ namespace HeadHunter.Services
 
             if (employer.Password != pass2)
             {
-                errors.Append("Пороли не совпадают \n");
+                errors.Append("Пароли не совпадают \n");
             }
             if (employer.Password.Length < 6)
             {
-                errors.Append("Пороли меньше 6 символов \n");
+                errors.Append("Пароли меньше 6 символов \n");
             }
 
             var errorMessage = errors.ToString();

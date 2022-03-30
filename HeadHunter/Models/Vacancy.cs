@@ -14,15 +14,14 @@ namespace HeadHunter.Models
 
         }
 
-        public Vacancy(string name, string description, string keyskills, string address, decimal salary, bool archived, string contact, bool hastest)
+        public Vacancy(string name, string description, string keyskills, string address, decimal salary, string contact)
         {
             Name = name;
             Description = description;
             KeySkills = keyskills;
             Address = address;
             Salary = salary;
-            Archived = archived;
-            HasTest = hastest;
+            Contact = contact;
         }
         /// <summary>
         /// Идентификатор вакансии
@@ -75,11 +74,6 @@ namespace HeadHunter.Models
         public decimal Salary { get; set; }
 
         /// <summary>
-        /// Вакансия архивирована или нет
-        /// </summary>
-        public bool Archived { get; set; }
-
-        /// <summary>
         /// Дата публикации вакансии
         /// </summary>
         public DateTime PublishedAt { get; set; }
@@ -92,7 +86,7 @@ namespace HeadHunter.Models
         /// <summary>
         /// Имеется тестовое задание
         /// </summary>
-        public bool HasTest { get; set; }
+        public HasTest Hastest { get; set; }
 
 
         /// <summary>
@@ -104,5 +98,21 @@ namespace HeadHunter.Models
         /// Список подавшихся на вакансию работников
         /// </summary>
         public virtual ICollection<Employee> Employees { get; set; }
+
+        public void PrintInfo()
+        {
+            Console.WriteLine("Номер вакансии: " + Id);
+            Console.WriteLine("Название вакансии: " + Name);
+            Console.WriteLine("Описание вакансии: " + Description);
+            Console.WriteLine("Тип вакансии: " + Type);
+            Console.WriteLine("Ключевые умения: " + KeySkills);
+            Console.WriteLine("Адрес: " + Address);
+            Console.WriteLine("Необходимый опыт работы: " + Experience);
+            Console.WriteLine("Оклад: " + Salary);
+            Console.WriteLine("Дата публикации вакансии: " + PublishedAt);
+            Console.WriteLine("Контакты: " + Contact);
+            Console.WriteLine("Имеется ли тестовое задание: " + Hastest);
+            Console.WriteLine("--------------------------------");
+        }
     }
 }
