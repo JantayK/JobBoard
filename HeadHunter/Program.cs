@@ -84,7 +84,7 @@ namespace HeadHunter
                 nameUser = login;
                 Menu(EmployerMenu);
                 idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
-                //Вызываем меню работадателя 
+                Menu(EmployerMenu);
             }
         }
 
@@ -161,7 +161,7 @@ namespace HeadHunter
                 AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
                 idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
-                //Вызываем меню работника
+                Menu(EmployeeMenu);
             }
         }
 
@@ -190,17 +190,17 @@ namespace HeadHunter
                 
                 if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
                 {
-                    Menu(EmployerMenu);
+                    
                     nameUser = login;
                     idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
-                    //Вызываем меню работадателя 
+                    Menu(EmployerMenu);
                 }
                 else
                 {
-                    Menu(EmployeeMenu);
+                    
                     nameUser = login;
                     idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
-                    //Вызываем меню работника
+                    Menu(EmployeeMenu);
                 }
                 
             }
