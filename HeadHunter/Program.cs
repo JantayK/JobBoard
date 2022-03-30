@@ -9,7 +9,8 @@ namespace HeadHunter
 {
     internal class Program
     {
-        private static string nameUser;
+        private static string nameUser ="";
+        private static int idUser = 0;
         static void Main(string[] args)
         {
             Menu(mainMenu);
@@ -50,7 +51,7 @@ namespace HeadHunter
             Console.WriteLine("Введите год основания компании:");
             int.TryParse(Console.ReadLine(), out foundationYear );
 
-            if (foundationYear == 0) foundationYear = DateTime.Now.Year;
+            if (foundationYear <= 0) foundationYear = DateTime.Now.Year;
 
             Employer employer = new Employer()
             {
@@ -75,12 +76,14 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
+                Menu(EmployerMenu);
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                 Menu(EmployerMenu);
             }
         }
@@ -151,11 +154,13 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                 Menu(EmployeeMenu);
             }
         }
@@ -177,22 +182,39 @@ namespace HeadHunter
                 Console.WriteLine(IsRessult.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                AvtorizaionUsser();
+                Menu(mainMenu);
             }
             else
             {
-                nameUser = login;
+                
+                
                 if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
                 {
+                    
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                     Menu(EmployerMenu);
                 }
                 else
                 {
+                    
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
                     Menu(EmployeeMenu);
                 }
                 
             }
 
+        }
+        /// <summary>
+        /// Обнулени данных и переход в стартовое меню
+        /// </summary>
+        public static void LogUot()
+        {
+            nameUser = "";
+            idUser = 0;
+            Console.Clear();
+            Menu(mainMenu);
         }
 
         public static void Menu(List<Option> options)

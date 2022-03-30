@@ -36,7 +36,11 @@ namespace HeadHunter.Services
 
         public Result<bool> AvtorizaionTupe(string login)
         {
-            return new Result<bool> {IsSuccess = true, Message = _avtorizaion.GetUsserType(login).ToString()};
+            return new Result<bool>
+            {
+                IsSuccess = true, Message = _avtorizaion.GetUsserType(login).ToString(),
+                UserId = _avtorizaion.GetUsserId(login)
+            };
         }
     }
 }
