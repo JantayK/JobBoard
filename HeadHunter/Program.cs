@@ -38,7 +38,7 @@ namespace HeadHunter
             Console.WriteLine("Введите Фамилию:");
             surName = Console.ReadLine();
             Console.WriteLine("Введите Пол м или ж:");
-            sex = Console.ReadLine();
+            sex = Console.ReadLine().ToLower();
             Console.WriteLine("Введите email:");
             email = Console.ReadLine();
             Console.WriteLine("Введите название компании:");
@@ -48,8 +48,9 @@ namespace HeadHunter
             Console.WriteLine("Введите адрес компании:");
             address = Console.ReadLine();
             Console.WriteLine("Введите год основания компании:");
-            int.TryParse(Console.ReadLine(), out foundationYear);
+            int.TryParse(Console.ReadLine(), out foundationYear );
 
+            if (foundationYear == 0) foundationYear = DateTime.Now.Year;
 
             Employer employer = new Employer()
             {
@@ -62,7 +63,7 @@ namespace HeadHunter
                 Description = description,
                 Address = address,
                 FoundationYear = foundationYear,
-                Sex = sex == "м" ? Sex.Male: Sex.Female,
+                Sex = sex == "м" ? Sex.Male : sex == "ж" ? Sex.Female : Sex.NoN,
             };
 
 
@@ -91,7 +92,8 @@ namespace HeadHunter
         {
             EmployeeServes _userService = new EmployeeServes();
 
-            string firstName, surName, login, password, password2,email, sex;
+            string firstName, surName, login, password, password2,email, sex, empLoyeeInfo ;
+            int experience =1, education = 3;
 
             Console.Clear();
             Console.WriteLine("Введите логин:");
@@ -107,8 +109,22 @@ namespace HeadHunter
             Console.WriteLine("Введите email:");
             email = Console.ReadLine();
             Console.WriteLine("Введите Пол м или ж:");
-            sex = Console.ReadLine();
-            
+            sex = Console.ReadLine().ToLower();
+            Console.WriteLine("Опишите свои качества:");
+            empLoyeeInfo = Console.ReadLine();
+
+            Console.WriteLine("Введите \n" +
+                              "1: Нет опыта \n" +
+                              "2: От 1 года до 3 лет \n" +
+                              "3: От 3 до 6 лет \n" +
+                              "4: Более 6 лет");
+            int.TryParse(Console.ReadLine(), out experience);
+
+            Console.WriteLine("Введите \n" +
+                              "1: Высшеее образование \n" +
+                              "2: Среднеее образование \n" +
+                              "3: Без образования \n");
+            int.TryParse(Console.ReadLine(), out education);
 
 
             Employee employee = new Employee()
@@ -118,7 +134,12 @@ namespace HeadHunter
                 FirstName = firstName,
                 SurName = surName,
                 Email = email,
-                Sex = sex == "м" ? Sex.Male : Sex.Female,
+                Sex = sex == "м" ? Sex.Male : sex=="ж"? Sex.Female: Sex.NoN,
+                EmployeeInfo = empLoyeeInfo,
+                Experience = experience == 2 ? ExperienceType.Between1And3: experience == 3 ? ExperienceType.Between3And6
+                            : experience == 4 ? ExperienceType.MoreThan6 : ExperienceType.NoExperience,
+                Education = education == 1 ? EducationType.HigherEducation: education == 2 
+                    ? EducationType.SecondaryEducation: EducationType.WithoutEducation
             };
 
 
