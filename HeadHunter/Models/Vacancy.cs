@@ -75,6 +75,11 @@ namespace HeadHunter.Models
         public decimal Salary { get; set; }
 
         /// <summary>
+        /// Вакансия архивирована или нет
+        /// </summary>
+        public bool Archived { get; set; }
+
+        /// <summary>
         /// Дата публикации вакансии
         /// </summary>
         public DateTime PublishedAt { get; set; }
@@ -99,21 +104,5 @@ namespace HeadHunter.Models
         /// Список подавшихся на вакансию работников
         /// </summary>
         public virtual ICollection<Employee> Employees { get; set; }
-
-        public void PrintInfo()
-        {
-            Console.WriteLine("Номер вакансии: " + Id);
-            Console.WriteLine("Название вакансии: " + Name);
-            Console.WriteLine("Описание вакансии: " + Description);
-            Console.WriteLine("Тип вакансии: " + Type);
-            Console.WriteLine("Ключевые умения: " + KeySkills);
-            Console.WriteLine("Адрес: " + Address);
-            Console.WriteLine("Необходимый опыт работы: " + Experience);
-            Console.WriteLine("Оклад: " + Salary);
-            Console.WriteLine("Дата публикации вакансии: " + PublishedAt);
-            Console.WriteLine("Контакты: " + Contact);
-            Console.WriteLine("Имеется ли тестовое задание: " + HasTest);
-            Console.WriteLine("--------------------------------");
-        }
     }
 }
