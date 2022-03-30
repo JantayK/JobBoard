@@ -25,7 +25,9 @@ namespace HeadHunter.Services
                 (employee.Password == null && employee.Password.Trim() == "") ||
                 (employee.FirstName == null && employee.FirstName.Trim() == "") ||
                 (employee.SurName == null && employee.SurName.Trim() == "") ||
-                (employee.Email == null && employee.Email.Trim() == ""))
+                (employee.Email == null && employee.Email.Trim() == "")||
+                (employee.EmployeeInfo == null && employee.EmployeeInfo.Trim() == ""))
+                
             {
                 errors.Append("Все поля должны быть заполнины \n");
             }
