@@ -9,7 +9,8 @@ namespace HeadHunter
 {
     internal class Program
     {
-        private static string nameUser;
+        private static string nameUser ="";
+        private static int idUser = 0;
         static void Main(string[] args)
         {
             //Menu(mainMenu);
@@ -120,7 +121,7 @@ namespace HeadHunter
             Console.WriteLine("Введите Фамилию:");
             surName = Console.ReadLine();
             Console.WriteLine("Введите Пол м или ж:");
-            sex = Console.ReadLine();
+            sex = Console.ReadLine().ToLower();
             Console.WriteLine("Введите email:");
             email = Console.ReadLine();
             Console.WriteLine("Введите название компании:");
@@ -130,8 +131,9 @@ namespace HeadHunter
             Console.WriteLine("Введите адрес компании:");
             address = Console.ReadLine();
             Console.WriteLine("Введите год основания компании:");
-            int.TryParse(Console.ReadLine(), out foundationYear);
+            int.TryParse(Console.ReadLine(), out foundationYear );
 
+            if (foundationYear <= 0) foundationYear = DateTime.Now.Year;
 
             Employer employer = new Employer()
             {
@@ -144,7 +146,7 @@ namespace HeadHunter
                 Description = description,
                 Address = address,
                 FoundationYear = foundationYear,
-                Sex = sex == "м" ? Sex.Male: Sex.Female,
+                Sex = sex == "м" ? Sex.Male : sex == "ж" ? Sex.Female : Sex.NoN,
             };
 
 
@@ -156,13 +158,15 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
-                //Вызываем меню работадателя 
+                Menu(EmployerMenu);
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                Menu(EmployerMenu);
             }
         }
 
@@ -173,7 +177,8 @@ namespace HeadHunter
         {
             EmployeeServes _userService = new EmployeeServes();
 
-            string firstName, surName, login, password, password2,email, sex;
+            string firstName, surName, login, password, password2,email, sex, empLoyeeInfo ;
+            int experience =1, education = 3;
 
             Console.Clear();
             Console.WriteLine("Введите логин:");
@@ -189,8 +194,22 @@ namespace HeadHunter
             Console.WriteLine("Введите email:");
             email = Console.ReadLine();
             Console.WriteLine("Введите Пол м или ж:");
-            sex = Console.ReadLine();
-            
+            sex = Console.ReadLine().ToLower();
+            Console.WriteLine("Опишите свои качества:");
+            empLoyeeInfo = Console.ReadLine();
+
+            Console.WriteLine("Введите \n" +
+                              "1: Нет опыта \n" +
+                              "2: От 1 года до 3 лет \n" +
+                              "3: От 3 до 6 лет \n" +
+                              "4: Более 6 лет");
+            int.TryParse(Console.ReadLine(), out experience);
+
+            Console.WriteLine("Введите \n" +
+                              "1: Высшеее образование \n" +
+                              "2: Среднеее образование \n" +
+                              "3: Без образования \n");
+            int.TryParse(Console.ReadLine(), out education);
 
 
             Employee employee = new Employee()
@@ -200,7 +219,12 @@ namespace HeadHunter
                 FirstName = firstName,
                 SurName = surName,
                 Email = email,
-                Sex = sex == "м" ? Sex.Male : Sex.Female,
+                Sex = sex == "м" ? Sex.Male : sex=="ж"? Sex.Female: Sex.NoN,
+                EmployeeInfo = empLoyeeInfo,
+                Experience = experience == 2 ? ExperienceType.Between1And3: experience == 3 ? ExperienceType.Between3And6
+                            : experience == 4 ? ExperienceType.MoreThan6 : ExperienceType.NoExperience,
+                Education = education == 1 ? EducationType.HigherEducation: education == 2 
+                    ? EducationType.SecondaryEducation: EducationType.WithoutEducation
             };
 
 
@@ -212,12 +236,14 @@ namespace HeadHunter
                 Console.WriteLine(result.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                RegistrationEmployer();
+                Menu(mainMenu);
             }
             else
             {
+                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
                 nameUser = login;
-                //Вызываем меню работника
+                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                Menu(EmployeeMenu);
             }
         }
 
@@ -238,22 +264,39 @@ namespace HeadHunter
                 Console.WriteLine(IsRessult.Message);
                 Console.WriteLine("Нажмите любую кнопку что бы продолжить");
                 Console.ReadKey();
-                AvtorizaionUsser();
+                Menu(mainMenu);
             }
             else
             {
-                nameUser = login;
+                
+                
                 if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
                 {
-                    //Вызываем меню работадателя 
+                    
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                    Menu(EmployerMenu);
                 }
                 else
                 {
-                    //Вызываем меню работника
+                    
+                    nameUser = login;
+                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                    Menu(EmployeeMenu);
                 }
                 
             }
 
+        }
+        /// <summary>
+        /// Обнулени данных и переход в стартовое меню
+        /// </summary>
+        public static void LogUot()
+        {
+            nameUser = "";
+            idUser = 0;
+            Console.Clear();
+            Menu(mainMenu);
         }
 
         public static void Menu(List<Option> options)
@@ -292,9 +335,176 @@ namespace HeadHunter
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Главное меню
+        /// </summary>
+        public static List<Option> mainMenu = new List<Option>
+            {
+                new Option("Войти", () => AvtorizaionUsser()),
+                new Option("Зарегистрироваться", () => RegistrationMenu()),
+                new Option("Выйти из приложения", () => Environment.Exit(0)),
+            };
+        
+        public static void Exit()
+        {
+            Menu(mainMenu);
+        }
+
+        /// <summary>
+        /// Меню регистрации
+        /// </summary>
+        public static void RegistrationMenu()
+        {
+            Console.Clear();
+            List<Option> Registration = new List<Option>
+            {
+                new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
+                new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() ),
+                new Option("Вернуться в главное меню", () => Exit() )
+            };
+            Menu(Registration);
+        }
+
+        /// <summary>
+        /// Меню работодателя
+        /// </summary>
+        public static List<Option> EmployerMenu = new List<Option>
+        {
+            new Option("Регистрация вакансий", () => VacancyRegistration() ),
+            new Option("Просмотреть вакансии", () => SeeVacancies()),
+            new Option("Изменить доступ к вакансии", () => ChangeStatus() ),
+            new Option("Вернуться в главное меню", () => Exit())
+        };
+
+
+        /// <summary>
+        /// Меню соискателя
+        /// </summary>
+        public static List<Option> EmployeeMenu = new List<Option>
+        {
+            new Option("Просмотреть доступные вакансии", () => SeeAvailableVacancies()),
+            new Option("Вернуться в главное меню", () => Exit())
+        };
+
+        /// <summary>
+        /// Регистрация вакансий
+        /// </summary>
+        public static void VacancyRegistration()
+        {
+            string name, description, keyskills, address, contact;
+            int experience = 1; int type = 1;
+            decimal salary = 1;
+            int hastest = 1;
+            DateTime publishedAt = DateTime.Today;
+
+            Console.Clear();
+            Console.WriteLine("Введите название вакансии:");
+            name = Console.ReadLine();
+            Console.WriteLine("Введите описание вакансии:");
+            description = Console.ReadLine();
+            Console.WriteLine("Введите тип вакансии:\n" +
+                "1: Открытая\n" +
+                "2: Закрытая");
+            int.TryParse(Console.ReadLine(), out type);
+            Console.WriteLine("Введите необходимые ключевые умения:");
+            keyskills = Console.ReadLine();
+            Console.WriteLine("Введите адрес: ");
+            address = Console.ReadLine();
+            Console.WriteLine("Введите необходимый опыт работы\n" +
+                               "1: Нет опыта \n" +
+                               "2: От 1 года до 3 лет \n" +
+                               "3: От 3 до 6 лет \n" +
+                               "4: Более 6 лет");
+            int.TryParse(Console.ReadLine(), out experience);
+            Console.WriteLine("Введите оклад: ");
+            decimal.TryParse(Console.ReadLine(), out salary);
+            Console.WriteLine("Введите дату публикации вакансии: ");
+            DateTime.TryParse(Console.ReadLine(), out publishedAt);
+            Console.WriteLine("Введите контакты для связи: ");
+            contact = Console.ReadLine();
+            Console.WriteLine("Будет ли иметься тестовое задание:\n" +
+                                "1: Да\n" +
+                                "2: Нет");
+            int.TryParse(Console.ReadLine(), out hastest);
+
+            Vacancy vacancy = new Vacancy()
+            {
+                Name = name,
+                Description = description,
+                Type = type == 1 ? VacancyType.Open : VacancyType.Closed,
+                KeySkills = keyskills,
+                Address = address,
+                Experience = experience == 1 ? ExperienceType.NoExperience
+                    : experience == 2 ? ExperienceType.Between1And3
+                    : experience == 3 ? ExperienceType.Between3And6
+                    : ExperienceType.MoreThan6,
+                Salary = salary,
+                PublishedAt = publishedAt,
+                Contact = contact,
+                Hastest = hastest == 1 ? HasTest.Has : HasTest.HasNot
+            };
+        }
+
+        /// <summary>
+        /// Просмотр вакансий
+        /// </summary>
+        public static void SeeVacancies()
+        {
+            //Надо написать
+        }
+
+        /// <summary>
+        /// Изменить статус вакансии
+        /// </summary>
+        public static void ChangeStatus()
+        {
+            //Надо написать 
+        }
+
+        /// <summary>
+        /// Просмотр доступных вакансий для соискателя 
+        /// </summary>
+        public static void SeeAvailableVacancies()
+        {
+            //Надо написать
+        }
+
+
+
         static void WriteMenu(List<Option> options, Option selectedOption)
         {
             Console.Clear();
+            if (options == mainMenu)
+            {
+                Console.WriteLine("Вас приветствует приложение Доски Объявлений\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+            if(options == EmployeeMenu)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Личный кабинет Соискателя\n");
+                Console.ResetColor();
+                Console.WriteLine("Добро пожаловать\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+            if (options == EmployerMenu)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Личный кабинет Работодателя\n");
+                Console.ResetColor();
+                Console.WriteLine("Добро пожаловать\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Выберите дальнейшие действия\n");
+                Console.ResetColor();
+            }
+
+
             foreach (Option option in options)
             {
                 if (option == selectedOption)
@@ -307,29 +517,6 @@ namespace HeadHunter
                 }
                 Console.WriteLine(option.Name);
             }
-        }
-
-        /// <summary>
-        /// Главное меню
-        /// </summary>
-        public static List<Option> mainMenu = new List<Option>
-            {
-                new Option("Войти", () => AvtorizaionUsser()),
-                new Option("Зарегистрироваться", () => RegistrationMenu()),
-                new Option("Выйти из приложения", () => Environment.Exit(0)),
-            };
-        /// <summary>
-        /// Меню регистрации
-        /// </summary>
-        public static void RegistrationMenu()
-        {
-            Console.Clear();
-            List<Option> Registration = new List<Option>
-            {
-                new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
-                new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() )
-            };
-            Menu(Registration);
         }
     }
 }
