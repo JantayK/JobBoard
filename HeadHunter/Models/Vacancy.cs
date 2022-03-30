@@ -14,15 +14,14 @@ namespace HeadHunter.Models
 
         }
 
-        public Vacancy(string name, string description, string keyskills, string address, decimal salary, bool archived, string contact, bool hastest)
+        public Vacancy(string name, string description, string keyskills, string address, decimal salary, string contact)
         {
             Name = name;
             Description = description;
             KeySkills = keyskills;
             Address = address;
             Salary = salary;
-            Archived = archived;
-            HasTest = hastest;
+            Contact = contact;
         }
         /// <summary>
         /// Идентификатор вакансии
@@ -87,7 +86,7 @@ namespace HeadHunter.Models
         /// <summary>
         /// Имеется тестовое задание
         /// </summary>
-        public bool HasTest { get; set; }
+        public HasTest Hastest { get; set; }
 
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace HeadHunter.Models
             Console.WriteLine("Оклад: " + Salary);
             Console.WriteLine("Дата публикации вакансии: " + PublishedAt);
             Console.WriteLine("Контакты: " + Contact);
-            Console.WriteLine("Имеется ли тестовое задание: " + HasTest);
+            Console.WriteLine("Имеется ли тестовое задание: " + Hastest);
             Console.WriteLine("--------------------------------");
         }
     }

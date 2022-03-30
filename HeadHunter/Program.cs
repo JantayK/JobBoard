@@ -290,19 +290,19 @@ namespace HeadHunter
             string name, description, keyskills, address, contact;
             int experience = 1; int type = 1;
             decimal salary = 1;
-            bool hastest;
+            int hastest = 1;
             DateTime publishedAt = DateTime.Today;
 
             Console.Clear();
-            Console.WriteLine("Введите название вакансии: ");
+            Console.WriteLine("Введите название вакансии:");
             name = Console.ReadLine();
-            Console.WriteLine("Введите описание вакансии: ");
+            Console.WriteLine("Введите описание вакансии:");
             description = Console.ReadLine();
             Console.WriteLine("Введите тип вакансии:\n" +
                 "1: Открытая\n" +
                 "2: Закрытая");
             int.TryParse(Console.ReadLine(), out type);
-            Console.WriteLine("Введите необходимые ключевые умения: ");
+            Console.WriteLine("Введите необходимые ключевые умения:");
             keyskills = Console.ReadLine();
             Console.WriteLine("Введите адрес: ");
             address = Console.ReadLine();
@@ -337,7 +337,7 @@ namespace HeadHunter
                 Salary = salary,
                 PublishedAt = publishedAt,
                 Contact = contact,
-                HasTest = hastest = 1 ? true : false
+                Hastest = hastest == 1 ? HasTest.Has : HasTest.HasNot
             };
         }
 
@@ -346,7 +346,7 @@ namespace HeadHunter
         /// </summary>
         public static void SeeVacancies()
         {
-
+            //Надо написать
         }
 
         /// <summary>
