@@ -287,7 +287,58 @@ namespace HeadHunter
         /// </summary>
         public static void VacancyRegistration()
         {
-            // Надо написать
+            string name, description, keyskills, address, contact;
+            int experience = 1; int type = 1;
+            decimal salary = 1;
+            bool hastest;
+            DateTime publishedAt = DateTime.Today;
+
+            Console.Clear();
+            Console.WriteLine("Введите название вакансии: ");
+            name = Console.ReadLine();
+            Console.WriteLine("Введите описание вакансии: ");
+            description = Console.ReadLine();
+            Console.WriteLine("Введите тип вакансии:\n" +
+                "1: Открытая\n" +
+                "2: Закрытая");
+            int.TryParse(Console.ReadLine(), out type);
+            Console.WriteLine("Введите необходимые ключевые умения: ");
+            keyskills = Console.ReadLine();
+            Console.WriteLine("Введите адрес: ");
+            address = Console.ReadLine();
+            Console.WriteLine("Введите необходимый опыт работы\n" +
+                               "1: Нет опыта \n" +
+                               "2: От 1 года до 3 лет \n" +
+                               "3: От 3 до 6 лет \n" +
+                               "4: Более 6 лет");
+            int.TryParse(Console.ReadLine(), out experience);
+            Console.WriteLine("Введите оклад: ");
+            decimal.TryParse(Console.ReadLine(), out salary);
+            Console.WriteLine("Введите дату публикации вакансии: ");
+            DateTime.TryParse(Console.ReadLine(), out publishedAt);
+            Console.WriteLine("Введите контакты для связи: ");
+            contact = Console.ReadLine();
+            Console.WriteLine("Будет ли иметься тестовое задание:\n" +
+                                "1: Да\n" +
+                                "2: Нет");
+            int.TryParse(Console.ReadLine(), out hastest);
+
+            Vacancy vacancy = new Vacancy()
+            {
+                Name = name,
+                Description = description,
+                Type = type == 1 ? VacancyType.Open : VacancyType.Closed,
+                KeySkills = keyskills,
+                Address = address,
+                Experience = experience == 1 ? ExperienceType.NoExperience
+                    : experience == 2 ? ExperienceType.Between1And3
+                    : experience == 3 ? ExperienceType.Between3And6
+                    : ExperienceType.MoreThan6,
+                Salary = salary,
+                PublishedAt = publishedAt,
+                Contact = contact,
+                HasTest = hastest = 1 ? true : false
+            };
         }
 
         /// <summary>
@@ -295,7 +346,7 @@ namespace HeadHunter
         /// </summary>
         public static void SeeVacancies()
         {
-            //Надо написать
+
         }
 
         /// <summary>
