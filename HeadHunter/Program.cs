@@ -426,7 +426,27 @@ namespace HeadHunter
         /// </summary>
         public static void ChangeStatus()
         {
-            //Надо написать 
+            //Надо написать
+            Console.Write("Введите идентификационный номер вакансии: ");
+            var vacancyId = int.Parse(Console.ReadLine());
+
+            using (var db = new ApplicationDbContext())
+            {
+                var vacancy = db.Vacancies.FirstOrDefault(x => x.Id == vacancyId && x.Type == VacancyType.Open);
+                if (vacancy == null)
+                {
+                    Console.WriteLine("Такой вакансии не существует!");
+                }
+                else
+                {
+                    vacancy.Type = VacancyType.Closed;
+                    db.SaveChanges();
+                }
+                Console.WriteLine("Тип вакансии успешно изменен на закрытый!");
+            }
+
+
+
         }
 
         /// <summary>
