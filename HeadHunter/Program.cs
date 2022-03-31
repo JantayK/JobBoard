@@ -5,6 +5,7 @@ using HeadHunter.Services;
 using HeadHunter.Utilits;
 using System.Collections.Generic;
 using HeadHunter.Repositories;
+using System.Linq;
 
 namespace HeadHunter
 {
@@ -408,7 +409,16 @@ namespace HeadHunter
         /// </summary>
         public static void SeeVacancies()
         {
-            //Надо написать
+            Console.Clear();
+            using (var db = new ApplicationDbContext())
+            {
+                var vacancies = db.Vacancies.ToList();
+
+                foreach (var x in vacancies)
+                {
+                    x.PrintInfo();
+                }
+            }            
         }
 
         /// <summary>
