@@ -9,6 +9,15 @@ namespace HeadHunter.Repositories
 {
     public class VacanciesRepository
     {
+        public void AddNewVacancy(Vacancy vacancy)
+        {
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
+            {
+                dbContext.Vacancies.Add(vacancy);
+                dbContext.SaveChanges();
+            }
+        }
+
         public List<Vacancy> GetVacancyOpen()
         {
             List<Vacancy> vacancies = new List<Vacancy>();
