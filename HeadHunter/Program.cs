@@ -208,9 +208,9 @@ namespace HeadHunter
 
         }
         /// <summary>
-        /// Обнулени данных и переход в стартовое меню
+        /// Обнуление данных и переход в стартовое меню
         /// </summary>
-        public static void LogUot()
+        public static void LogOut()
         {
             nameUser = "";
             idUser = 0;
@@ -263,11 +263,6 @@ namespace HeadHunter
                 new Option("Зарегистрироваться", () => RegistrationMenu()),
                 new Option("Выйти из приложения", () => Environment.Exit(0)),
             };
-        
-        public static void Exit()
-        {
-            Menu(mainMenu);
-        }
 
         /// <summary>
         /// Меню регистрации
@@ -279,7 +274,7 @@ namespace HeadHunter
             {
                 new Option("Зарегистрироваться как Работодатель", () => RegistrationEmployer() ),
                 new Option("Зарегистрироваться как Соискатель", () => RegistrationEmployee() ),
-                new Option("Вернуться в главное меню", () => Exit() )
+                new Option("Вернуться в главное меню", () => LogOut() )
             };
             Menu(Registration);
         }
@@ -292,7 +287,7 @@ namespace HeadHunter
             new Option("Регистрация вакансий", () => VacancyRegistration() ),
             new Option("Просмотреть вакансии", () => SeeVacancies()),
             new Option("Изменить доступ к вакансии", () => ChangeStatus() ),
-            new Option("Вернуться в главное меню", () => Exit())
+            new Option("Вернуться в главное меню", () => LogOut())
         };
 
 
@@ -302,7 +297,7 @@ namespace HeadHunter
         public static List<Option> EmployeeMenu = new List<Option>
         {
             new Option("Просмотреть доступные вакансии", () => SeeAvailableVacancies()),
-            new Option("Вернуться в главное меню", () => Exit())
+            new Option("Вернуться в главное меню", () => LogOut())
         };
 
         /// <summary>
@@ -310,6 +305,7 @@ namespace HeadHunter
         /// </summary>
         public static void VacancyRegistration()
         {
+            VacancyService _vacancyService = new VacancyService();
             string name, description, keyskills, address, contact;
             int experience = 1; int type = 1;
             decimal salary = 1;
@@ -321,30 +317,54 @@ namespace HeadHunter
             name = Console.ReadLine();
             Console.WriteLine("Введите описание вакансии:");
             description = Console.ReadLine();
+
+            v:
             Console.WriteLine("Введите тип вакансии:\n" +
                 "1: Открытая\n" +
                 "2: Закрытая");
-            int.TryParse(Console.ReadLine(), out type);
+            if(!int.TryParse(Console.ReadLine(), out type) && type < 1 && type > 2)
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto v;
+            }
             Console.WriteLine("Введите необходимые ключевые умения:");
             keyskills = Console.ReadLine();
             Console.WriteLine("Введите адрес: ");
             address = Console.ReadLine();
+
+            c:
             Console.WriteLine("Введите необходимый опыт работы\n" +
                                "1: Нет опыта \n" +
                                "2: От 1 года до 3 лет \n" +
                                "3: От 3 до 6 лет \n" +
                                "4: Более 6 лет");
-            int.TryParse(Console.ReadLine(), out experience);
+            if(!int.TryParse(Console.ReadLine(), out experience) && experience < 1 && experience > 4)
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto c;
+            }
             Console.WriteLine("Введите оклад: ");
             decimal.TryParse(Console.ReadLine(), out salary);
-            Console.WriteLine("Введите дату публикации вакансии: ");
-            DateTime.TryParse(Console.ReadLine(), out publishedAt);
+
+            d:
+            Console.WriteLine("Введите дату публикации вакансии (ГГГГ,ММ,ДД): ");
+            if(!DateTime.TryParse(Console.ReadLine(), out publishedAt))
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto d;
+            }
             Console.WriteLine("Введите контакты для связи: ");
             contact = Console.ReadLine();
+
+            l:
             Console.WriteLine("Будет ли иметься тестовое задание:\n" +
                                 "1: Да\n" +
                                 "2: Нет");
-            int.TryParse(Console.ReadLine(), out hastest);
+            if(!int.TryParse(Console.ReadLine(), out hastest) && hastest < 1 && hastest > 2)
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto l;
+            }
 
             Vacancy vacancy = new Vacancy()
             {
@@ -362,6 +382,25 @@ namespace HeadHunter
                 Contact = contact,
                 Hastest = hastest == 1 ? HasTest.Has : HasTest.HasNot
             };
+            Result<bool> result = _vacancyService.RegisteredVacancy(vacancy);
+
+            if (result.IsSuccess == false)
+            {
+                Console.WriteLine(result.Message);
+                Console.WriteLine("Нажмите любую кнопку что бы продолжить");
+                Console.ReadKey();
+                Menu(EmployerMenu);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Вакансия успешно добавлена!\n");
+                Console.ResetColor();
+                Console.WriteLine("Нажмите любую кнопку что бы продолжить");
+                Console.ReadKey();
+                Menu(EmployerMenu);
+            }
+
         }
 
         /// <summary>
@@ -393,7 +432,6 @@ namespace HeadHunter
             {
                 item.PrintInfo();
             }
-            
         }
 
 
