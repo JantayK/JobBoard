@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HeadHunter.Repositories
 {
-    public interface IUserRepositori<T>
+    public interface IUserRepository<T>
     {
         void AddNewUser(T user);
-        bool getSearchLoginUser(string login);
+        bool SearchLoginUser(string login);
     }
 }

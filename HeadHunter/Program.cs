@@ -31,26 +31,31 @@ namespace HeadHunter
             Console.Clear();
             Console.WriteLine("Введите логин:");
             login = Console.ReadLine();
-            Console.WriteLine("Введите пароль, пороль должен быть не меньше 6 символов:");
+            Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
             password = Console.ReadLine();
-            Console.WriteLine("Повторите  пароль");
+            Console.WriteLine("\nПовторите  пароль");
             password2 = Console.ReadLine();
-            Console.WriteLine("Введите Имя:");
+            Console.WriteLine("\nВведите Имя:");
             firstName = Console.ReadLine();
-            Console.WriteLine("Введите Фамилию:");
+            Console.WriteLine("\nВведите Фамилию:");
             surName = Console.ReadLine();
-            Console.WriteLine("Введите Пол м или ж:");
+            Console.WriteLine("\nВведите Пол м или ж:");
             sex = Console.ReadLine().ToLower();
-            Console.WriteLine("Введите email:");
+            Console.WriteLine("\nВведите email:");
             email = Console.ReadLine();
-            Console.WriteLine("Введите название компании:");
+            Console.WriteLine("\nВведите название компании:");
             companyName = Console.ReadLine();
-            Console.WriteLine("Введите описания компании:");
+            Console.WriteLine("\nВведите описания компании:");
             description = Console.ReadLine();
-            Console.WriteLine("Введите адрес компании:");
+            Console.WriteLine("\nВведите адрес компании:");
             address = Console.ReadLine();
-            Console.WriteLine("Введите год основания компании:");
-            int.TryParse(Console.ReadLine(), out foundationYear );
+            yea:
+            Console.WriteLine("\nВведите год основания компании:");
+            if(!int.TryParse(Console.ReadLine(), out foundationYear) && foundationYear < 0)
+            {
+                Console.WriteLine("\nНекорректный ввод!");
+                goto yea;
+            }
 
             if (foundationYear <= 0) foundationYear = DateTime.Now.Year;
 
@@ -69,7 +74,7 @@ namespace HeadHunter
             };
 
 
-            Result<bool> result = _userService.RegistredUser(employer, password2);
+            Result<bool> result = _userService.RegisteredUser(employer, password2);
 
 
             if (result.IsSuccess == false)
@@ -81,10 +86,10 @@ namespace HeadHunter
             }
             else
             {
-                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
+                AuthorizationUserService _avtorizaion = new AuthorizationUserService();
                 nameUser = login;
                 Menu(EmployerMenu);
-                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                idUser = _avtorizaion.AuthorizationType(login).UserId;
                 Menu(EmployerMenu);
             }
         }
@@ -94,7 +99,7 @@ namespace HeadHunter
         /// </summary>
         public static void RegistrationEmployee()
         {
-            EmployeeServes _userService = new EmployeeServes();
+            EmployeeService _userService = new EmployeeService();
 
             string firstName, surName, login, password, password2,email, sex, empLoyeeInfo ;
             int experience =1, education = 3;
@@ -102,34 +107,41 @@ namespace HeadHunter
             Console.Clear();
             Console.WriteLine("Введите логин:");
             login = Console.ReadLine();
-            Console.WriteLine("Введите пароль, пороль должен быть не меньше 6 символов:");
+            Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
             password = Console.ReadLine();
-            Console.WriteLine("Повторите  пароль");
+            Console.WriteLine("\nПовторите  пароль:");
             password2 = Console.ReadLine();
-            Console.WriteLine("Введите Имя:");
+            Console.WriteLine("\nВведите Имя:");
             firstName = Console.ReadLine();
-            Console.WriteLine("Введите Фамилию:");
+            Console.WriteLine("\nВведите Фамилию:");
             surName = Console.ReadLine();
-            Console.WriteLine("Введите email:");
+            Console.WriteLine("\nВведите email:");
             email = Console.ReadLine();
-            Console.WriteLine("Введите Пол м или ж:");
+            Console.WriteLine("\nВведите Пол м или ж:");
             sex = Console.ReadLine().ToLower();
-            Console.WriteLine("Опишите свои качества:");
+            Console.WriteLine("\nОпишите свои качества:");
             empLoyeeInfo = Console.ReadLine();
-
-            Console.WriteLine("Введите \n" +
+            expi:
+            Console.WriteLine("\nВведите ваш опыт работы: \n" +
                               "1: Нет опыта \n" +
                               "2: От 1 года до 3 лет \n" +
                               "3: От 3 до 6 лет \n" +
                               "4: Более 6 лет");
-            int.TryParse(Console.ReadLine(), out experience);
-
-            Console.WriteLine("Введите \n" +
+            if (!int.TryParse(Console.ReadLine(), out experience) || experience < 1 || experience > 4)
+            {
+                Console.WriteLine("\nНекорректный ввод!");
+                goto expi;
+            }
+            edu:
+            Console.WriteLine("\nВведите ваше образование: \n" +
                               "1: Высшеее образование \n" +
                               "2: Среднеее образование \n" +
                               "3: Без образования \n");
-            int.TryParse(Console.ReadLine(), out education);
-
+            if (!int.TryParse(Console.ReadLine(), out education) || education < 1 || education > 3)
+            {
+                Console.WriteLine("\nНекорректный ввод!");
+                goto edu;
+            }
 
             Employee employee = new Employee()
             {
@@ -147,7 +159,7 @@ namespace HeadHunter
             };
 
 
-            Result<bool> result = _userService.RegistredUser(employee, password2);
+            Result<bool> result = _userService.RegisteredUser(employee, password2);
 
 
             if (result.IsSuccess == false)
@@ -159,24 +171,24 @@ namespace HeadHunter
             }
             else
             {
-                AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
+                AuthorizationUserService _avtorizaion = new AuthorizationUserService();
                 nameUser = login;
-                idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                idUser = _avtorizaion.AuthorizationType(login).UserId;
                 Menu(EmployeeMenu);
             }
         }
 
-        public static void AvtorizaionUsser()
+        public static void AuthorizationUser()
         {
-            AvtorizaionUsserService _avtorizaion = new AvtorizaionUsserService();
+            AuthorizationUserService _avtorizaion = new AuthorizationUserService();
             string login, pass;
             Console.Clear();
             Console.WriteLine("Введите логин");
             login = Console.ReadLine();
-            Console.WriteLine("Введите пороль");
+            Console.WriteLine("Введите пароль");
             pass = Console.ReadLine();
 
-            var IsRessult = _avtorizaion.Avtorizaion(login, pass);
+            var IsRessult = _avtorizaion.Authorization(login, pass);
 
             if (IsRessult.IsSuccess == false)
             {
@@ -189,18 +201,18 @@ namespace HeadHunter
             {
                 
                 
-                if (_avtorizaion.AvtorizaionTupe(login).Message == "Employer")
+                if (_avtorizaion.AuthorizationType(login).Message == "Employer")
                 {
                     
                     nameUser = login;
-                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                    idUser = _avtorizaion.AuthorizationType(login).UserId;
                     Menu(EmployerMenu);
                 }
                 else
                 {
                     
                     nameUser = login;
-                    idUser = _avtorizaion.AvtorizaionTupe(login).UserId;
+                    idUser = _avtorizaion.AuthorizationType(login).UserId;
                     Menu(EmployeeMenu);
                 }
                 
@@ -259,7 +271,7 @@ namespace HeadHunter
         /// </summary>
         public static List<Option> mainMenu = new List<Option>
             {
-                new Option("Войти", () => AvtorizaionUsser()),
+                new Option("Войти", () => AuthorizationUser()),
                 new Option("Зарегистрироваться", () => RegistrationMenu()),
                 new Option("Выйти из приложения", () => Environment.Exit(0)),
             };
@@ -315,54 +327,54 @@ namespace HeadHunter
             Console.Clear();
             Console.WriteLine("Введите название вакансии:");
             name = Console.ReadLine();
-            Console.WriteLine("Введите описание вакансии:");
+            Console.WriteLine("\nВведите описание вакансии:");
             description = Console.ReadLine();
 
-            v:
-            Console.WriteLine("Введите тип вакансии:\n" +
+            ty:
+            Console.WriteLine("\nВведите тип вакансии:\n" +
                 "1: Открытая\n" +
                 "2: Закрытая");
             if(!int.TryParse(Console.ReadLine(), out type) && type < 1 && type > 2)
             {
-                Console.WriteLine("Некорректный ввод!");
-                goto v;
+                Console.WriteLine("\nНекорректный ввод!");
+                goto ty;
             }
-            Console.WriteLine("Введите необходимые ключевые умения:");
+            Console.WriteLine("\nВведите необходимые ключевые умения:");
             keyskills = Console.ReadLine();
-            Console.WriteLine("Введите адрес: ");
+            Console.WriteLine("\nВведите адрес: ");
             address = Console.ReadLine();
 
-            c:
-            Console.WriteLine("Введите необходимый опыт работы\n" +
+            ex:
+            Console.WriteLine("\nВведите необходимый опыт работы\n" +
                                "1: Нет опыта \n" +
                                "2: От 1 года до 3 лет \n" +
                                "3: От 3 до 6 лет \n" +
                                "4: Более 6 лет");
             if(!int.TryParse(Console.ReadLine(), out experience) && experience < 1 && experience > 4)
             {
-                Console.WriteLine("Некорректный ввод!");
-                goto c;
+                Console.WriteLine("\nНекорректный ввод!");
+                goto ex;
             }
-            Console.WriteLine("Введите оклад: ");
+            Console.WriteLine("\nВведите оклад: ");
             decimal.TryParse(Console.ReadLine(), out salary);
 
             d:
-            Console.WriteLine("Введите дату публикации вакансии (ГГГГ,ММ,ДД): ");
+            Console.WriteLine("\nВведите дату публикации вакансии (ГГГГ,ММ,ДД): ");
             if(!DateTime.TryParse(Console.ReadLine(), out publishedAt))
             {
-                Console.WriteLine("Некорректный ввод!");
+                Console.WriteLine("\nНекорректный ввод!");
                 goto d;
             }
-            Console.WriteLine("Введите контакты для связи: ");
+            Console.WriteLine("\nВведите контакты для связи: ");
             contact = Console.ReadLine();
 
             l:
-            Console.WriteLine("Будет ли иметься тестовое задание:\n" +
+            Console.WriteLine("\nБудет ли иметься тестовое задание:\n" +
                                 "1: Да\n" +
                                 "2: Нет");
             if(!int.TryParse(Console.ReadLine(), out hastest) && hastest < 1 && hastest > 2)
             {
-                Console.WriteLine("Некорректный ввод!");
+                Console.WriteLine("\nНекорректный ввод!");
                 goto l;
             }
 
@@ -380,7 +392,8 @@ namespace HeadHunter
                 Salary = salary,
                 PublishedAt = publishedAt,
                 Contact = contact,
-                Hastest = hastest == 1 ? HasTest.Has : HasTest.HasNot
+                Hastest = hastest == 1 ? HasTest.Has : HasTest.HasNot,
+                EmpId = idUser
             };
             Result<bool> result = _vacancyService.RegisteredVacancy(vacancy);
 
@@ -408,7 +421,17 @@ namespace HeadHunter
         /// </summary>
         public static void SeeVacancies()
         {
-            //Надо написать
+            Console.Clear();
+            VacanciesRepository _vacanciesRepository = new VacanciesRepository();
+            var vacancies = _vacanciesRepository.GetVacancy(idUser);
+            foreach (var item in vacancies)
+            {
+                item.PrintInfo();
+            }
+
+            Console.WriteLine("\nНажмите на любую клавишу чтобы вернуться назад");
+            Console.ReadKey();
+            Menu(EmployerMenu);
         }
 
         /// <summary>
@@ -416,7 +439,41 @@ namespace HeadHunter
         /// </summary>
         public static void ChangeStatus()
         {
-            //Надо написать 
+            Console.Clear();
+            int vacancyId, status;
+            VacancyType option;
+            iv:
+            Console.WriteLine("Введите идентификационный номер вакансии: ");
+            if (!int.TryParse(Console.ReadLine(), out vacancyId) && vacancyId > 0 )
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto iv;
+            }
+            
+            st:
+            Console.WriteLine("Выберите какой статус вы хотите присвоить вакансии:\n" +
+                                "1: Открытый\n" +
+                                "2: Закрытый");
+            if (!int.TryParse(Console.ReadLine(), out status) && status < 1 && status > 2)
+            {
+                Console.WriteLine("Некорректный ввод!");
+                goto st;
+            }
+            
+            if(status == 1)
+            {
+                option = VacancyType.Open;
+            }
+            else
+            {
+                option = VacancyType.Closed;
+            }
+            VacanciesRepository _vacanciesRepository = new VacanciesRepository();
+            _vacanciesRepository.ChangeVacancyType(vacancyId, option);
+
+            Console.WriteLine("\nНажмите на любую клавишу чтобы вернуться назад");
+            Console.ReadKey();
+            Menu(EmployerMenu);
         }
 
         /// <summary>
@@ -452,7 +509,7 @@ namespace HeadHunter
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Личный кабинет Соискателя\n");
                 Console.ResetColor();
-                Console.WriteLine("Добро пожаловать\n");
+                Console.WriteLine($"Добро пожаловать {nameUser}\n");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Выберите дальнейшие действия\n");
                 Console.ResetColor();
@@ -463,7 +520,7 @@ namespace HeadHunter
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Личный кабинет Работодателя\n");
                 Console.ResetColor();
-                Console.WriteLine("Добро пожаловать\n");
+                Console.WriteLine($"Добро пожаловать {nameUser}\n");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Выберите дальнейшие действия\n");
                 Console.ResetColor();

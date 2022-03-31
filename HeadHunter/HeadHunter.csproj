@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220331141635_AddedForeignKeys.cs" />
+    <Compile Remove="Migrations\20220331141635_AddedForeignKeys.Designer.cs" />
+    <Compile Remove="Migrations\20220331141946_AddedForeignKey.cs" />
+    <Compile Remove="Migrations\20220331141946_AddedForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20220331142442_AddedForeignKey.cs" />
+    <Compile Remove="Migrations\20220331142442_AddedForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20220331144846_Test.cs" />
+    <Compile Remove="Migrations\20220331144846_Test.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.23">
       <PrivateAssets>all</PrivateAssets>
