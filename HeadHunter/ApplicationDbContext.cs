@@ -34,6 +34,7 @@ namespace HeadHunter
                 .Entity<User>()
                 .HasIndex(x => x.Login)
                 .IsUnique();
+
         }
     }
 }

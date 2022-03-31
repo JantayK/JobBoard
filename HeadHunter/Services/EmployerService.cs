@@ -9,14 +9,14 @@ namespace HeadHunter.Services
 {
     public class EmployerService
     {
-        private IUserRepositori<Employer> _userRepositori;
+        private IUserRepository<Employer> _userRepositori;
 
         public EmployerService()
         {
-            _userRepositori = new EmployerRepositori();
+            _userRepositori = new EmployerRepository();
         }
 
-        public Result<bool> RegistredUser(Employer employer, string pass2)
+        public Result<bool> RegisteredUser(Employer employer, string pass2)
         {
             var errors = new StringBuilder();
 
@@ -30,7 +30,7 @@ namespace HeadHunter.Services
             {
                 errors.Append("Все поля должны быть заполнены! \n");
             }
-            if (_userRepositori.getSearchLoginUser(employer.Login))
+            if (_userRepositori.SearchLoginUser(employer.Login))
             {
                 errors.Append("Такой пользователь уже есть \n");
             }

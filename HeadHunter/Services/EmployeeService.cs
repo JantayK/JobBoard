@@ -7,17 +7,17 @@ using HeadHunter.Utilits;
 
 namespace HeadHunter.Services
 {
-    public class EmployeeServes
+    public class EmployeeService
     {
-        private IUserRepositori<Employee> _userRepositori;
+        private IUserRepository<Employee> _userRepositori;
 
-        public EmployeeServes()
+        public EmployeeService()
         {
-            _userRepositori = new EmployeesRepositori();
+            _userRepositori = new EmployeesRepository();
         }
 
 
-        public Result<bool> RegistredUser(Employee employee, string pass2)
+        public Result<bool> RegisteredUser(Employee employee, string pass2)
         {
             var errors = new StringBuilder();
 
@@ -31,7 +31,7 @@ namespace HeadHunter.Services
             {
                 errors.Append("Все поля должны быть заполнены! \n");
             }
-            if (_userRepositori.getSearchLoginUser(employee.Login))
+            if (_userRepositori.SearchLoginUser(employee.Login))
             {
                 errors.Append("Такой пользователь уже есть \n");
             }
