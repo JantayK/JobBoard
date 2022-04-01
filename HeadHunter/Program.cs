@@ -426,7 +426,6 @@ namespace HeadHunter
         /// </summary>
         public static void ChangeStatus()
         {
-            //Надо написать
             Console.Write("Введите идентификационный номер вакансии: ");
             var vacancyId = int.Parse(Console.ReadLine());
 
