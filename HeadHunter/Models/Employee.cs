@@ -7,7 +7,7 @@ using System.Text;
 namespace HeadHunter.Models
 {
     /// <summary>
-    /// Работник
+    /// Класс Работника
     /// </summary>
     public class Employee : User
     {

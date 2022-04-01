@@ -5,6 +5,9 @@ using System.Text;
 
 namespace HeadHunter.Models
 {
+    /// <summary>
+    /// Класс Работодателя
+    /// </summary>
     public class Employer : User
     {
         public Employer()
