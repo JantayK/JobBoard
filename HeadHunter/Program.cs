@@ -25,30 +25,173 @@ namespace HeadHunter
         {
             EmployerService _userService = new EmployerService();
 
-            string firstName , surName, login, password, password2, email, companyName, description, address, sex;
+            string firstName ="" , surName ="", login ="", password ="", password2 ="", email ="", 
+                companyName ="", description="", address ="", sex ="";
             int foundationYear = 0;
 
             Console.Clear();
-            Console.WriteLine("Введите логин:");
-            login = Console.ReadLine();
-            Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
-            password = Console.ReadLine();
-            Console.WriteLine("\nПовторите  пароль");
-            password2 = Console.ReadLine();
-            Console.WriteLine("\nВведите Имя:");
-            firstName = Console.ReadLine();
-            Console.WriteLine("\nВведите Фамилию:");
-            surName = Console.ReadLine();
-            Console.WriteLine("\nВведите Пол м или ж:");
-            sex = Console.ReadLine().ToLower();
-            Console.WriteLine("\nВведите email:");
-            email = Console.ReadLine();
-            Console.WriteLine("\nВведите название компании:");
-            companyName = Console.ReadLine();
-            Console.WriteLine("\nВведите описания компании:");
-            description = Console.ReadLine();
-            Console.WriteLine("\nВведите адрес компании:");
-            address = Console.ReadLine();
+
+            while (login.Trim() =="")
+            {
+                Console.WriteLine("Введите логин:");
+                login = Console.ReadLine();
+                if (login.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (password.Trim() == "" || password.Length< 6)
+            {
+
+                Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
+                password = Console.ReadLine();
+                if (password.Trim() == "" || password.Length < 6)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Пороль должен быть не меньше 6 символов и не может быть пустым");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            while (password != password2)
+            {
+
+                Console.WriteLine("\nПовторите  пароль");
+                password2 = Console.ReadLine();
+                if (password != password2)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Пороль должен совподать");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (firstName.Trim() == "")
+            {
+                Console.WriteLine("\nВведите Имя:");
+                firstName = Console.ReadLine();
+                if (firstName.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (surName.Trim() == "")
+            {
+                Console.WriteLine("\nВведите Фамилию:");
+                surName = Console.ReadLine();
+                if (surName.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            var isSex = true;
+            while (isSex)
+            {
+                Console.WriteLine("\nВведите Пол м или ж:");
+                sex = Console.ReadLine().ToLower();
+
+                switch (sex)
+                {
+                    case "м":
+                        isSex = false;
+                        break;
+                    case "ж":
+                        isSex = false;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Данные обезатильны");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                }
+            }
+
+            var isEmail = true;
+            while (isEmail)
+            {
+                Console.WriteLine("\nВведите email:");
+                email = Console.ReadLine();
+
+                if (email.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    continue;
+                }
+
+                if (!email.Contains("@"))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Какой Email без @");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    isEmail = false;
+                }
+            }
+
+
+            while (companyName.Trim() == "")
+            {
+                Console.WriteLine("\nВведите название компании:");
+                companyName = Console.ReadLine();
+
+                if (companyName.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (description.Trim() == "")
+            {
+                Console.WriteLine("\nВведите описания компании:");
+                description = Console.ReadLine();
+
+                if (description.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (address.Trim() == "")
+            {
+                Console.WriteLine("\nВведите описания компании:");
+                address = Console.ReadLine();
+
+                if (address.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            
             yea:
             Console.WriteLine("\nВведите год основания компании:");
             if(!int.TryParse(Console.ReadLine(), out foundationYear) && foundationYear < 0)
@@ -101,26 +244,143 @@ namespace HeadHunter
         {
             EmployeeService _userService = new EmployeeService();
 
-            string firstName, surName, login, password, password2,email, sex, empLoyeeInfo ;
+            string firstName ="", surName ="", login ="", password ="", password2 ="",email ="", sex ="", empLoyeeInfo ="" ;
             int experience =1, education = 3;
 
             Console.Clear();
-            Console.WriteLine("Введите логин:");
-            login = Console.ReadLine();
-            Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
-            password = Console.ReadLine();
-            Console.WriteLine("\nПовторите  пароль:");
-            password2 = Console.ReadLine();
-            Console.WriteLine("\nВведите Имя:");
-            firstName = Console.ReadLine();
-            Console.WriteLine("\nВведите Фамилию:");
-            surName = Console.ReadLine();
-            Console.WriteLine("\nВведите email:");
-            email = Console.ReadLine();
-            Console.WriteLine("\nВведите Пол м или ж:");
-            sex = Console.ReadLine().ToLower();
-            Console.WriteLine("\nОпишите свои качества:");
-            empLoyeeInfo = Console.ReadLine();
+            while (login.Trim() == "")
+            {
+                Console.WriteLine("Введите логин:");
+                login = Console.ReadLine();
+                if (login.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (password.Trim() == "" || password.Length < 6)
+            {
+
+                Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
+                password = Console.ReadLine();
+                if (password.Trim() == "" || password.Length < 6)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Пороль должен быть не меньше 6 символов и не может быть пустым");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            while (password != password2)
+            {
+
+                Console.WriteLine("\nПовторите  пароль");
+                password2 = Console.ReadLine();
+                if (password != password2)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Пороль должен совподать");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (firstName.Trim() == "")
+            {
+                Console.WriteLine("\nВведите Имя:");
+                firstName = Console.ReadLine();
+                if (firstName.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            while (surName.Trim() == "")
+            {
+                Console.WriteLine("\nВведите Фамилию:");
+                surName = Console.ReadLine();
+                if (surName.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            var isSex = true;
+            while (isSex)
+            {
+                Console.WriteLine("\nВведите Пол м или ж:");
+                sex = Console.ReadLine().ToLower();
+
+                switch (sex)
+                {
+                    case "м":
+                        isSex = false;
+                        break;
+                    case "ж":
+                        isSex = false;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Данные обезатильны");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                }
+            }
+
+            var isEmail = true;
+            while (isEmail)
+            {
+                Console.WriteLine("\nВведите email:");
+                email = Console.ReadLine();
+
+                if (email.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    continue;
+                }
+
+                if (!email.Contains("@"))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Какой Email без @");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    isEmail = false;
+                }
+            }
+
+            while (empLoyeeInfo.Trim() == "")
+            {
+                Console.WriteLine("\nОпишите свои качества:");
+                empLoyeeInfo = Console.ReadLine();
+
+                if (empLoyeeInfo.Trim() == "")
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Данные обезатильны");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+
+            
+
             expi:
             Console.WriteLine("\nВведите ваш опыт работы: \n" +
                               "1: Нет опыта \n" +

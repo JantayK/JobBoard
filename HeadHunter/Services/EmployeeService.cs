@@ -21,28 +21,10 @@ namespace HeadHunter.Services
         {
             var errors = new StringBuilder();
 
-            if (employee == null || (employee.Login == null && employee.Login.Trim() == "") ||
-                (employee.Password == null && employee.Password.Trim() == "") ||
-                (employee.FirstName == null && employee.FirstName.Trim() == "") ||
-                (employee.SurName == null && employee.SurName.Trim() == "") ||
-                (employee.Email == null && employee.Email.Trim() == "")||
-                (employee.EmployeeInfo == null && employee.EmployeeInfo.Trim() == ""))
-                
-            {
-                errors.Append("Все поля должны быть заполнены! \n");
-            }
+            
             if (_userRepositori.SearchLoginUser(employee.Login))
             {
                 errors.Append("Такой пользователь уже есть \n");
-            }
-
-            if (employee.Password != pass2)
-            {
-                errors.Append("Пароли не совпадают \n");
-            }
-            if (employee.Password.Length < 6)
-            {
-                errors.Append("Пароли меньше 6 символов \n");
             }
 
             var errorMessage = errors.ToString();
