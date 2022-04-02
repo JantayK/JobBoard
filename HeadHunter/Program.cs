@@ -137,6 +137,7 @@ namespace HeadHunter
 
                 if (!email.Contains("@"))
                 {
+
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Какой Email без @");
@@ -144,7 +145,17 @@ namespace HeadHunter
                 }
                 else
                 {
+                    if (email == "@")
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ты серьезно вел одну @ ");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
                     isEmail = false;
+                    }
                 }
             }
 
@@ -361,7 +372,17 @@ namespace HeadHunter
                 }
                 else
                 {
-                    isEmail = false;
+                    if (email == "@")
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ты серьезно вел одну @ ");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        isEmail = false;
+                    }
                 }
             }
 
