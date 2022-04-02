@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace HeadHunter.Repositories
 {
-    public class AvtorizaionUsser
+    public class AuthorizationUser
     {
 
-        public bool AvtorizaionUssers(string login, string pass)
+        public bool AuthorizationUsers(string login, string pass)
         {
             bool isValid = false;
             using (ApplicationDbContext dbContext = new ApplicationDbContext())
@@ -22,7 +22,7 @@ namespace HeadHunter.Repositories
         }
 
 
-        public string GetUsserType(string login)
+        public string GetUserType(string login)
         {
             string tupe;
             using (ApplicationDbContext dbContext = new ApplicationDbContext())
@@ -33,7 +33,7 @@ namespace HeadHunter.Repositories
 
             return tupe;
         }
-        public int GetUsserId(string login)
+        public int GetUserId(string login)
         {
             int userId;
             using (ApplicationDbContext dbContext = new ApplicationDbContext())

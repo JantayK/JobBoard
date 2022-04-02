@@ -6,7 +6,7 @@ using HeadHunter.Models;
 
 namespace HeadHunter.Repositories
 {
-    public class EmployerRepositori: IUserRepositori<Employer>
+    public class EmployerRepository: IUserRepository<Employer>
     {
         public void AddNewUser(Employer user)
         {
@@ -17,15 +17,15 @@ namespace HeadHunter.Repositories
             }
         }
 
-        public bool getSearchLoginUser(string login)
+        public bool SearchLoginUser(string login)
         {
-            bool isSerch = false;
+            bool isFound = false;
              using (ApplicationDbContext dbContext = new ApplicationDbContext())
              {
-                 isSerch = dbContext.Users.Any(x => x.Login == login);
+                 isFound = dbContext.Users.Any(x => x.Login == login);
              }
 
-             return isSerch;
+             return isFound;
         }
     }
 }

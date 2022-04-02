@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace HeadHunter.Repositories
 {
-    public class EmployeesRepositori :IUserRepositori<Employee>
+    public class EmployeesRepository :IUserRepository<Employee>
     {
         public void AddNewUser(Employee user)
         {
@@ -17,7 +17,7 @@ namespace HeadHunter.Repositories
             }
         }
 
-        public bool getSearchLoginUser(string login)
+        public bool SearchLoginUser(string login)
         {
             bool isSerch = false;
             using (ApplicationDbContext dbContext = new ApplicationDbContext())

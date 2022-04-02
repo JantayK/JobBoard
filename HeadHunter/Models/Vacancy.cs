@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using HeadHunter.Enums;
@@ -31,11 +32,14 @@ namespace HeadHunter.Models
         /// <summary>
         /// Идентификатор работодателя
         /// </summary>
-        public long EmployerId { get; set; }
+        [ForeignKey("Employer")]
+        public int? EmpId { get; set; }
 
         /// <summary>
         /// Название вакансии
         /// </summary>
+        [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string Name { get; set; }
 
         /// <summary>
@@ -46,16 +50,22 @@ namespace HeadHunter.Models
         /// <summary>
         /// Описание вакансии
         /// </summary>
+        [Required]
+        [StringLength(70, MinimumLength = 1)]
         public string Description { get; set; }
 
         /// <summary>
         /// Ключевые умения
         /// </summary>
+        [Required]
+        [StringLength(70, MinimumLength = 1)]
         public string KeySkills { get; set; }
 
         /// <summary>
         /// Адрес
         /// </summary>
+        [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string Address { get; set; }
 
         /// <summary>
@@ -71,6 +81,7 @@ namespace HeadHunter.Models
         /// <summary>
         /// Зарплата
         /// </summary>
+        [Required]
         public decimal Salary { get; set; }
 
         /// <summary>
@@ -81,6 +92,8 @@ namespace HeadHunter.Models
         /// <summary>
         /// Контакты
         /// </summary>
+        [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string Contact { get; set; }
 
         /// <summary>
@@ -101,6 +114,7 @@ namespace HeadHunter.Models
 
         public void PrintInfo()
         {
+            Console.WriteLine(" ");
             Console.WriteLine("Номер вакансии: " + Id);
             Console.WriteLine("Название вакансии: " + Name);
             Console.WriteLine("Описание вакансии: " + Description);

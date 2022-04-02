@@ -6,21 +6,21 @@ using HeadHunter.Utilits;
 
 namespace HeadHunter.Services
 {
-    public class AvtorizaionUsserService
+    public class AuthorizationUserService
     {
-        private AvtorizaionUsser _avtorizaion = new AvtorizaionUsser();
+        private AuthorizationUser _avtorizaion = new AuthorizationUser();
 
 
-        public Result<bool> Avtorizaion(string login, string pass)
+        public Result<bool> Authorization(string login, string pass)
         {
             var errors = new StringBuilder();
 
             if (login == null || pass == null)
             {
-                errors.Append("Все поля должны быть заполнины \n");
+                errors.Append("Все поля должны быть заполнены! \n");
             }
 
-            if (!_avtorizaion.AvtorizaionUssers(login, pass))
+            if (!_avtorizaion.AuthorizationUsers(login, pass))
             {
                 errors.Append("Пользователь не найден\n");
             }
@@ -34,12 +34,12 @@ namespace HeadHunter.Services
             return new Result<bool> {IsSuccess = true, Message = ""};
         }
 
-        public Result<bool> AvtorizaionTupe(string login)
+        public Result<bool> AuthorizationType(string login)
         {
             return new Result<bool>
             {
-                IsSuccess = true, Message = _avtorizaion.GetUsserType(login).ToString(),
-                UserId = _avtorizaion.GetUsserId(login)
+                IsSuccess = true, Message = _avtorizaion.GetUserType(login).ToString(),
+                UserId = _avtorizaion.GetUserId(login)
             };
         }
     }
