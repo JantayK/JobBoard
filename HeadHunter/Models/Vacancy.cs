@@ -8,6 +8,9 @@ using HeadHunter.Enums;
 
 namespace HeadHunter.Models
 {
+    /// <summary>
+    /// Класс Вакансии
+    /// </summary>
     public class Vacancy : IEntity<int>
     {
         public Vacancy()

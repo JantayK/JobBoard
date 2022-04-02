@@ -25,8 +25,8 @@ namespace HeadHunter
         {
             EmployerService _userService = new EmployerService();
 
-            string firstName ="" , surName ="", login ="", password ="", password2 ="", email ="", 
-                companyName ="", description="", address ="", sex ="";
+            string firstName = "" , surName = "", login = "", password = "", password2 = "", email = "", 
+                companyName = "", description= "", address = "", sex = "";
             int foundationYear = 0;
 
             Console.Clear();
@@ -39,7 +39,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -47,13 +47,13 @@ namespace HeadHunter
             while (password.Trim() == "" || password.Length< 6)
             {
 
-                Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
+                Console.WriteLine("\nВведите пароль, пароль должен быть не меньше 6 символов:");
                 password = Console.ReadLine();
                 if (password.Trim() == "" || password.Length < 6)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Пороль должен быть не меньше 6 символов и не может быть пустым");
+                    Console.WriteLine("Пароль должен быть не меньше 6 символов и не может быть пустым");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -66,7 +66,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Пороль должен совподать");
+                    Console.WriteLine("Пароль должен совподать");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -79,7 +79,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -92,7 +92,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -114,7 +114,7 @@ namespace HeadHunter
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Данные обезатильны");
+                        Console.WriteLine("Данные обязательны!");
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
@@ -130,7 +130,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                     continue;
                 }
@@ -169,35 +169,35 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
             while (description.Trim() == "")
             {
-                Console.WriteLine("\nВведите описания компании:");
+                Console.WriteLine("\nВведите описание компании:");
                 description = Console.ReadLine();
 
                 if (description.Trim() == "")
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
             while (address.Trim() == "")
             {
-                Console.WriteLine("\nВведите описания компании:");
+                Console.WriteLine("\nВведите описание компании:");
                 address = Console.ReadLine();
 
                 if (address.Trim() == "")
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -205,7 +205,7 @@ namespace HeadHunter
             
             yea:
             Console.WriteLine("\nВведите год основания компании:");
-            if(!int.TryParse(Console.ReadLine(), out foundationYear) && foundationYear < 0)
+            if(!int.TryParse(Console.ReadLine(), out foundationYear) || foundationYear < 0)
             {
                 Console.WriteLine("\nНекорректный ввод!");
                 goto yea;
@@ -224,7 +224,7 @@ namespace HeadHunter
                 Description = description,
                 Address = address,
                 FoundationYear = foundationYear,
-                Sex = sex == "м" ? Sex.Male : sex == "ж" ? Sex.Female : Sex.NoN,
+                Sex = sex == "м" ? Sex.Male : sex == "м" ? Sex.Female : Sex.NotSpecified,
             };
 
 
@@ -255,8 +255,8 @@ namespace HeadHunter
         {
             EmployeeService _userService = new EmployeeService();
 
-            string firstName ="", surName ="", login ="", password ="", password2 ="",email ="", sex ="", empLoyeeInfo ="" ;
-            int experience =1, education = 3;
+            string firstName = "", surName = "", login = "", password = "", password2 = "",email = "", sex = "", empLoyeeInfo = "" ;
+            int experience = 1, education = 3;
 
             Console.Clear();
             while (login.Trim() == "")
@@ -267,7 +267,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -275,13 +275,13 @@ namespace HeadHunter
             while (password.Trim() == "" || password.Length < 6)
             {
 
-                Console.WriteLine("\nВведите пароль, пороль должен быть не меньше 6 символов:");
+                Console.WriteLine("\nВведите пароль, пароль должен быть не меньше 6 символов:");
                 password = Console.ReadLine();
                 if (password.Trim() == "" || password.Length < 6)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Пороль должен быть не меньше 6 символов и не может быть пустым");
+                    Console.WriteLine("Пароль должен быть не меньше 6 символов и не может быть пустым");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -294,7 +294,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Пороль должен совподать");
+                    Console.WriteLine("Пароль должен совподать");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -307,7 +307,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -320,7 +320,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -342,7 +342,7 @@ namespace HeadHunter
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Данные обезатильны");
+                        Console.WriteLine("Данные обязательны!");
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
@@ -358,7 +358,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                     continue;
                 }
@@ -395,7 +395,7 @@ namespace HeadHunter
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Данные обезатильны");
+                    Console.WriteLine("Данные обязательны!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -431,7 +431,7 @@ namespace HeadHunter
                 FirstName = firstName,
                 SurName = surName,
                 Email = email,
-                Sex = sex == "м" ? Sex.Male : sex=="ж"? Sex.Female: Sex.NoN,
+                Sex = sex == "м" ? Sex.Male : sex == "ж" ? Sex.Female: Sex.NotSpecified,
                 EmployeeInfo = empLoyeeInfo,
                 Experience = experience == 2 ? ExperienceType.Between1And3: experience == 3 ? ExperienceType.Between3And6
                             : experience == 4 ? ExperienceType.MoreThan6 : ExperienceType.NoExperience,
@@ -615,7 +615,7 @@ namespace HeadHunter
             Console.WriteLine("\nВведите тип вакансии:\n" +
                 "1: Открытая\n" +
                 "2: Закрытая");
-            if(!int.TryParse(Console.ReadLine(), out type) && type < 1 && type > 2)
+            if(!int.TryParse(Console.ReadLine(), out type) || type < 1 || type > 2)
             {
                 Console.WriteLine("\nНекорректный ввод!");
                 goto ty;
@@ -631,7 +631,7 @@ namespace HeadHunter
                                "2: От 1 года до 3 лет \n" +
                                "3: От 3 до 6 лет \n" +
                                "4: Более 6 лет");
-            if(!int.TryParse(Console.ReadLine(), out experience) && experience < 1 && experience > 4)
+            if(!int.TryParse(Console.ReadLine(), out experience) || experience < 1 || experience > 4)
             {
                 Console.WriteLine("\nНекорректный ввод!");
                 goto ex;
@@ -653,7 +653,7 @@ namespace HeadHunter
             Console.WriteLine("\nБудет ли иметься тестовое задание:\n" +
                                 "1: Да\n" +
                                 "2: Нет");
-            if(!int.TryParse(Console.ReadLine(), out hastest) && hastest < 1 && hastest > 2)
+            if(!int.TryParse(Console.ReadLine(), out hastest) || hastest < 1 || hastest > 2)
             {
                 Console.WriteLine("\nНекорректный ввод!");
                 goto l;
@@ -735,7 +735,7 @@ namespace HeadHunter
             Console.WriteLine("Выберите какой статус вы хотите присвоить вакансии:\n" +
                                 "1: Открытый\n" +
                                 "2: Закрытый");
-            if (!int.TryParse(Console.ReadLine(), out status) && status < 1 && status > 2)
+            if (!int.TryParse(Console.ReadLine(), out status) || status < 1 || status > 2)
             {
                 Console.WriteLine("Некорректный ввод!");
                 goto st;

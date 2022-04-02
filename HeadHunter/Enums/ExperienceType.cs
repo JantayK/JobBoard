@@ -4,6 +4,9 @@ using System.Text;
 
 namespace HeadHunter.Enums
 {
+    /// <summary>
+    /// Опыт работы
+    /// </summary>
     public enum ExperienceType
     {
         /// <summary>
